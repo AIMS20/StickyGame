@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8705768015293791859}
   - component: {fileID: 8705768015293791860}
   - component: {fileID: 8705768015293791861}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8705768015299849724}
   - component: {fileID: 8705768015299849725}
   - component: {fileID: 8705768015299849726}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705768015344949463}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripes (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 8705768015362065262}
   - component: {fileID: 8705768015362065263}
   - component: {fileID: 8705768015362065232}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 8705768015369006581}
   - component: {fileID: 8705768015369006582}
   - component: {fileID: 8705768015369006583}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 8705768015369333453}
   - component: {fileID: 8705768015369333454}
   - component: {fileID: 8705768015369333455}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 8705768015372778701}
   - component: {fileID: 8705768015372778702}
   - component: {fileID: 8705768015372778703}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 8705768015389688567}
   - component: {fileID: 8705768015389688568}
   - component: {fileID: 8705768015389688569}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -718,7 +718,7 @@ GameObject:
   - component: {fileID: 8705768015453566398}
   - component: {fileID: 8705768015453566399}
   - component: {fileID: 8705768015453566368}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -810,7 +810,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705768015470100219}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RoadStripes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 8705768015513586773}
   - component: {fileID: 8705768015513586774}
   - component: {fileID: 8705768015513586775}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 8705768015538838102}
   - component: {fileID: 8705768015538838103}
   - component: {fileID: 8705768015538838104}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1040,7 +1040,7 @@ GameObject:
   - component: {fileID: 8705768015550274404}
   - component: {fileID: 8705768015550274405}
   - component: {fileID: 8705768015550274406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1135,7 +1135,7 @@ GameObject:
   - component: {fileID: 8705768015550869635}
   - component: {fileID: 8705768015550869636}
   - component: {fileID: 8705768015550869637}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1227,7 +1227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705768015556464196}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1271,7 +1271,7 @@ GameObject:
   - component: {fileID: 8705768015590749812}
   - component: {fileID: 8705768015590749813}
   - component: {fileID: 8705768015590749814}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1366,7 +1366,7 @@ GameObject:
   - component: {fileID: 8705768015595082957}
   - component: {fileID: 8705768015595082958}
   - component: {fileID: 8705768015595082959}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1461,7 +1461,7 @@ GameObject:
   - component: {fileID: 8705768015656183556}
   - component: {fileID: 8705768015656183557}
   - component: {fileID: 8705768015656183558}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,7 +1556,7 @@ GameObject:
   - component: {fileID: 8705768015673351672}
   - component: {fileID: 8705768015673351673}
   - component: {fileID: 8705768015673351674}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CurbL_Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1651,7 +1651,7 @@ GameObject:
   - component: {fileID: 8705768015677010180}
   - component: {fileID: 8705768015677010181}
   - component: {fileID: 8705768015677010182}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1746,7 +1746,7 @@ GameObject:
   - component: {fileID: 8705768015716402963}
   - component: {fileID: 8705768015716402964}
   - component: {fileID: 8705768015716402965}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1841,7 +1841,7 @@ GameObject:
   - component: {fileID: 8705768015719005940}
   - component: {fileID: 8705768015719005941}
   - component: {fileID: 8705768015719005942}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1936,7 +1936,7 @@ GameObject:
   - component: {fileID: 8705768015730063588}
   - component: {fileID: 8705768015730063589}
   - component: {fileID: 8705768015730063590}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2030,10 +2030,11 @@ GameObject:
   - component: {fileID: 8705768015760127154}
   - component: {fileID: 8705768015760127155}
   - component: {fileID: 8705768015760127156}
-  - component: {fileID: 8705768015760127157}
   - component: {fileID: 8705768015760127158}
-  m_Layer: 0
-  m_Name: Road
+  - component: {fileID: 5375633580326518458}
+  - component: {fileID: 4416073496082560021}
+  m_Layer: 10
+  m_Name: PRF_RoadTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2107,20 +2108,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8705768015760127157
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8705768015760127159}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &8705768015760127158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2134,6 +2121,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5375633580326518458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8705768015760127159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01f658378bc3f24096355dde8da6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistanceMod: 5
+  tileSpeed: 100
+--- !u!54 &4416073496082560021
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8705768015760127159}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 118
+  m_CollisionDetection: 0
 --- !u!1 &8705768015801404355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,7 +2163,7 @@ GameObject:
   - component: {fileID: 8705768015801404383}
   - component: {fileID: 8705768015801404352}
   - component: {fileID: 8705768015801404353}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CurbR_Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2241,7 +2258,7 @@ GameObject:
   - component: {fileID: 8705768015802727150}
   - component: {fileID: 8705768015802727151}
   - component: {fileID: 8705768015802727120}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2336,7 +2353,7 @@ GameObject:
   - component: {fileID: 8705768015812879750}
   - component: {fileID: 8705768015812879751}
   - component: {fileID: 8705768015812879752}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2431,7 +2448,7 @@ GameObject:
   - component: {fileID: 8705768015849976216}
   - component: {fileID: 8705768015849976217}
   - component: {fileID: 8705768015849976218}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2526,7 +2543,7 @@ GameObject:
   - component: {fileID: 8705768015856857041}
   - component: {fileID: 8705768015856857042}
   - component: {fileID: 8705768015856857043}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2621,7 +2638,7 @@ GameObject:
   - component: {fileID: 8705768015879408530}
   - component: {fileID: 8705768015879408531}
   - component: {fileID: 8705768015879408532}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2716,7 +2733,7 @@ GameObject:
   - component: {fileID: 8705768015885741329}
   - component: {fileID: 8705768015885741330}
   - component: {fileID: 8705768015885741331}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2811,7 +2828,7 @@ GameObject:
   - component: {fileID: 8705768015928602088}
   - component: {fileID: 8705768015928602089}
   - component: {fileID: 8705768015928602090}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2906,7 +2923,7 @@ GameObject:
   - component: {fileID: 8705768015984947798}
   - component: {fileID: 8705768015984947799}
   - component: {fileID: 8705768015984947800}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3001,7 +3018,7 @@ GameObject:
   - component: {fileID: 8705768015997817096}
   - component: {fileID: 8705768015997817097}
   - component: {fileID: 8705768015997817098}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3096,7 +3113,7 @@ GameObject:
   - component: {fileID: 8705768016026755108}
   - component: {fileID: 8705768016026755109}
   - component: {fileID: 8705768016026755110}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3188,7 +3205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705768016071628195}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripes (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3232,7 +3249,7 @@ GameObject:
   - component: {fileID: 8705768016076313081}
   - component: {fileID: 8705768016076313082}
   - component: {fileID: 8705768016076313083}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3327,7 +3344,7 @@ GameObject:
   - component: {fileID: 8705768016088608407}
   - component: {fileID: 8705768016088608408}
   - component: {fileID: 8705768016088608409}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3422,7 +3439,7 @@ GameObject:
   - component: {fileID: 8705768016150122345}
   - component: {fileID: 8705768016150122346}
   - component: {fileID: 8705768016150122347}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3517,7 +3534,7 @@ GameObject:
   - component: {fileID: 8705768016159906874}
   - component: {fileID: 8705768016159906875}
   - component: {fileID: 8705768016159906876}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3612,7 +3629,7 @@ GameObject:
   - component: {fileID: 8705768016175803664}
   - component: {fileID: 8705768016175803665}
   - component: {fileID: 8705768016175803666}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3707,7 +3724,7 @@ GameObject:
   - component: {fileID: 8705768016216410991}
   - component: {fileID: 8705768016216410960}
   - component: {fileID: 8705768016216410961}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3802,7 +3819,7 @@ GameObject:
   - component: {fileID: 8705768016219795916}
   - component: {fileID: 8705768016219795917}
   - component: {fileID: 8705768016219795918}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3897,7 +3914,7 @@ GameObject:
   - component: {fileID: 8705768016232115715}
   - component: {fileID: 8705768016232115716}
   - component: {fileID: 8705768016232115717}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3992,7 +4009,7 @@ GameObject:
   - component: {fileID: 8705768016311382918}
   - component: {fileID: 8705768016311382919}
   - component: {fileID: 8705768016311382920}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4087,7 +4104,7 @@ GameObject:
   - component: {fileID: 8705768016404591248}
   - component: {fileID: 8705768016404591249}
   - component: {fileID: 8705768016404591250}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4182,7 +4199,7 @@ GameObject:
   - component: {fileID: 8705768016408089573}
   - component: {fileID: 8705768016408089574}
   - component: {fileID: 8705768016408089575}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4277,7 +4294,7 @@ GameObject:
   - component: {fileID: 8705768016412597004}
   - component: {fileID: 8705768016412597005}
   - component: {fileID: 8705768016412597006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4372,7 +4389,7 @@ GameObject:
   - component: {fileID: 8705768016434581013}
   - component: {fileID: 8705768016434581014}
   - component: {fileID: 8705768016434581015}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4467,7 +4484,7 @@ GameObject:
   - component: {fileID: 8705768016437680299}
   - component: {fileID: 8705768016437680300}
   - component: {fileID: 8705768016437680301}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4562,7 +4579,7 @@ GameObject:
   - component: {fileID: 8705768016450776561}
   - component: {fileID: 8705768016450776562}
   - component: {fileID: 8705768016450776563}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4657,7 +4674,7 @@ GameObject:
   - component: {fileID: 8705768016454573068}
   - component: {fileID: 8705768016454573069}
   - component: {fileID: 8705768016454573070}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4752,7 +4769,7 @@ GameObject:
   - component: {fileID: 8705768016501635190}
   - component: {fileID: 8705768016501635191}
   - component: {fileID: 8705768016501635192}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4847,7 +4864,7 @@ GameObject:
   - component: {fileID: 8705768016570894485}
   - component: {fileID: 8705768016570894486}
   - component: {fileID: 8705768016570894487}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4942,7 +4959,7 @@ GameObject:
   - component: {fileID: 8705768016580694234}
   - component: {fileID: 8705768016580694235}
   - component: {fileID: 8705768016580694236}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5037,7 +5054,7 @@ GameObject:
   - component: {fileID: 8705768016580849751}
   - component: {fileID: 8705768016580849752}
   - component: {fileID: 8705768016580849753}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5129,7 +5146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705768016593537660}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripes (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5170,7 +5187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705768016653637147}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripes (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5214,7 +5231,7 @@ GameObject:
   - component: {fileID: 8705768016675509411}
   - component: {fileID: 8705768016675509412}
   - component: {fileID: 8705768016675509413}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5309,7 +5326,7 @@ GameObject:
   - component: {fileID: 8705768016730192560}
   - component: {fileID: 8705768016730192561}
   - component: {fileID: 8705768016730192562}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5404,7 +5421,7 @@ GameObject:
   - component: {fileID: 8705768016766728300}
   - component: {fileID: 8705768016766728301}
   - component: {fileID: 8705768016766728302}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5499,7 +5516,7 @@ GameObject:
   - component: {fileID: 8705768016809954631}
   - component: {fileID: 8705768016809954632}
   - component: {fileID: 8705768016809954633}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5594,7 +5611,7 @@ GameObject:
   - component: {fileID: 8705768016826070768}
   - component: {fileID: 8705768016826070769}
   - component: {fileID: 8705768016826070770}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5689,7 +5706,7 @@ GameObject:
   - component: {fileID: 8705768016894748351}
   - component: {fileID: 8705768016894748320}
   - component: {fileID: 8705768016894748321}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5784,7 +5801,7 @@ GameObject:
   - component: {fileID: 8705768016911654173}
   - component: {fileID: 8705768016911654174}
   - component: {fileID: 8705768016911654175}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5879,7 +5896,7 @@ GameObject:
   - component: {fileID: 8705768016922949579}
   - component: {fileID: 8705768016922949580}
   - component: {fileID: 8705768016922949581}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CurbL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5974,7 +5991,7 @@ GameObject:
   - component: {fileID: 8705768016941698127}
   - component: {fileID: 8705768016941698992}
   - component: {fileID: 8705768016941698993}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6069,7 +6086,7 @@ GameObject:
   - component: {fileID: 8705768017038262009}
   - component: {fileID: 8705768017038262010}
   - component: {fileID: 8705768017038262011}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6164,7 +6181,7 @@ GameObject:
   - component: {fileID: 8705768017044980576}
   - component: {fileID: 8705768017044980577}
   - component: {fileID: 8705768017044980578}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6259,7 +6276,7 @@ GameObject:
   - component: {fileID: 8705768017054855994}
   - component: {fileID: 8705768017054855995}
   - component: {fileID: 8705768017054855996}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6354,7 +6371,7 @@ GameObject:
   - component: {fileID: 8705768017067386009}
   - component: {fileID: 8705768017067386010}
   - component: {fileID: 8705768017067386011}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6446,7 +6463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705768017072689929}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripes (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6490,7 +6507,7 @@ GameObject:
   - component: {fileID: 8705768017085072393}
   - component: {fileID: 8705768017085072394}
   - component: {fileID: 8705768017085072395}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6585,7 +6602,7 @@ GameObject:
   - component: {fileID: 8705768017096007908}
   - component: {fileID: 8705768017096007909}
   - component: {fileID: 8705768017096007910}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6680,7 +6697,7 @@ GameObject:
   - component: {fileID: 8705768017099114344}
   - component: {fileID: 8705768017099114345}
   - component: {fileID: 8705768017099114346}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6775,7 +6792,7 @@ GameObject:
   - component: {fileID: 8705768017115282818}
   - component: {fileID: 8705768017115282819}
   - component: {fileID: 8705768017115282820}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6870,7 +6887,7 @@ GameObject:
   - component: {fileID: 8705768017192685609}
   - component: {fileID: 8705768017192685610}
   - component: {fileID: 8705768017192685611}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6965,7 +6982,7 @@ GameObject:
   - component: {fileID: 8705768017204093939}
   - component: {fileID: 8705768017204093940}
   - component: {fileID: 8705768017204093941}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7060,7 +7077,7 @@ GameObject:
   - component: {fileID: 8705768017215905769}
   - component: {fileID: 8705768017215905770}
   - component: {fileID: 8705768017215905771}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7155,7 +7172,7 @@ GameObject:
   - component: {fileID: 8705768017217803644}
   - component: {fileID: 8705768017217803645}
   - component: {fileID: 8705768017217803646}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7250,7 +7267,7 @@ GameObject:
   - component: {fileID: 8705768017230141744}
   - component: {fileID: 8705768017230141745}
   - component: {fileID: 8705768017230141746}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7342,7 +7359,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705768017264001858}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripes (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7386,7 +7403,7 @@ GameObject:
   - component: {fileID: 8705768017288151945}
   - component: {fileID: 8705768017288151946}
   - component: {fileID: 8705768017288151947}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7481,7 +7498,7 @@ GameObject:
   - component: {fileID: 8705768017306935214}
   - component: {fileID: 8705768017306935215}
   - component: {fileID: 8705768017306935184}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7576,7 +7593,7 @@ GameObject:
   - component: {fileID: 8705768017334405073}
   - component: {fileID: 8705768017334405074}
   - component: {fileID: 8705768017334405075}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7671,7 +7688,7 @@ GameObject:
   - component: {fileID: 8705768017335297732}
   - component: {fileID: 8705768017335297733}
   - component: {fileID: 8705768017335297734}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7766,7 +7783,7 @@ GameObject:
   - component: {fileID: 8705768017370538495}
   - component: {fileID: 8705768017370538464}
   - component: {fileID: 8705768017370538465}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CurbR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7861,7 +7878,7 @@ GameObject:
   - component: {fileID: 8705768017370603268}
   - component: {fileID: 8705768017370603269}
   - component: {fileID: 8705768017370603270}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7956,7 +7973,7 @@ GameObject:
   - component: {fileID: 8705768017371355629}
   - component: {fileID: 8705768017371355630}
   - component: {fileID: 8705768017371355631}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8051,7 +8068,7 @@ GameObject:
   - component: {fileID: 8705768017429824670}
   - component: {fileID: 8705768017429824671}
   - component: {fileID: 8705768017429824640}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Roadstripe (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
