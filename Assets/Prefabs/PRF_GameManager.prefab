@@ -88,8 +88,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6756655520058813097, guid: 95c87f0013a8edd45bcab59c04beaa71, type: 3}
-  rb: {fileID: 0}
+  policeCar: {fileID: 100010, guid: c242e8f877bfdcd41baf7688f8257e61, type: 3}
+  policeCarsMax: 1
+  policeSpawnpos: {x: 0, y: 0, z: 0}
   roadTile: {fileID: 8705768015760127159, guid: 0939b1afbcafaf4439a4e81d6b8ad464, type: 3}
-  roadTileCount: 5
+  camTarget: {fileID: 0}
   roadSpawnpos: {x: 0, y: 0, z: -25}
+  tileSpawnSpeed: 0.95
   timeToStart: 5

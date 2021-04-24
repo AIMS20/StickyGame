@@ -84,7 +84,7 @@ public class TruckController : MonoBehaviour
             
         
 
-        print(axisInput);
+        // print(axisInput);
         
         //spawn poop on A
         if (canPoop &&  Input.GetButtonDown("Poop")){

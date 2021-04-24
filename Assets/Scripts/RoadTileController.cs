@@ -32,7 +32,7 @@ public class RoadTileController : MonoBehaviour
         // print(currentDistance);
         if (currentDistance > maxDistance)
         {
-            Destroy(tile);
+            Destroy(tile); //TODO: fix me
         }
     }
 }
