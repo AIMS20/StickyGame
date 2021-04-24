@@ -685,8 +685,9 @@ MonoBehaviour:
   maxTurn: 35
   poopSpawnObj: {fileID: 8387173531910572228}
   poopSpawn: {x: 0, y: 0, z: 0}
-  turnStrength: 400
-  rotateStrength: 2.5
+  poopCooldown: 1.5
+  moveStrength: 550
+  rotateDamper: 1.25
   tyres:
   - {fileID: 8356990137067563751}
   - {fileID: 5557123463657607676}

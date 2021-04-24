@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public static float tileSpeed = 500f;
     [SerializeField] public static float maxDistanceMod = 3f;
     [SerializeField] float timeToStart;
-    private float currentTime;
+    public float currentTime;
     
     
     // Start is called before the first frame update
@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
         camTarget.transform.position = player.transform.position;
         
         currentTime += Time.deltaTime;
-        // print(currentDuration);
         if (currentTime > timeToStart){
             StartRace();
         }

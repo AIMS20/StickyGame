@@ -17,7 +17,7 @@ public class RoadTileController : MonoBehaviour
 ;
         maxDistance = tile.GetComponent<BoxCollider>().size.z * global::GameManager.maxDistanceMod;
         var rb = tile.GetComponent<Rigidbody>();
-        rb.AddForce(new Vector3(0,0,global::GameManager.tileSpeed));
+        rb.AddForce(new Vector3(0,0,global::GameManager.tileSpeed * tile.GetComponent<Rigidbody>().mass));
     }
 
     // Update is called once per frame

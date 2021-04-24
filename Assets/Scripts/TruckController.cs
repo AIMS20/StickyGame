@@ -8,19 +8,23 @@ public class TruckController : MonoBehaviour
     public GameObject poop;
     [SerializeField] float maxTurn;
     
+    [SerializeField] public GameObject poopSpawnObj;
+    [SerializeField] public Vector3 poopSpawn;
+    [SerializeField] private float poopCooldown;
+    
+    [SerializeField] private float moveStrength;
+    [SerializeField] private float rotateDamper;
+    [SerializeField] List<Transform> tyres;
+    
+    // [SerializeField] List<Rigidbody> FrontTyresRB; //TODO: use to rotate front wheels in axis with maxturn
+    
     private GameObject truck;
     private Rigidbody rb;
     private float axisInput;
-    [SerializeField] public GameObject poopSpawnObj;
-    [SerializeField] public Vector3 poopSpawn;
-    [SerializeField] private float moveStrength;
-    [SerializeField] private float rotateDamper;
-    
-    [SerializeField] List<Transform> tyres;
-    // [SerializeField] List<Rigidbody> FrontTyresRB;
-    
+    private float currentCooldown;
     private float rotationSpeed = 5f;
-    
+    private bool canPoop;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +48,12 @@ public class TruckController : MonoBehaviour
     void Update()
     {
         poopSpawn = poopSpawnObj.transform.position;
+        currentCooldown -= Time.deltaTime;
+
+        if (currentCooldown <= 0){
+            canPoop = true;
+            currentCooldown = poopCooldown;
+        }
     }
 
     private void SpinTires()
@@ -77,10 +87,11 @@ public class TruckController : MonoBehaviour
         print(axisInput);
         
         //spawn poop on A
-        if (Input.GetButtonDown("Poop")){
+        if (canPoop &&  Input.GetButtonDown("Poop")){
             print("POOPING");
-
-            Instantiate(poop, poopSpawn, Quaternion.identity);
+                
+            Instantiate(poop, poopSpawn, Quaternion.AngleAxis(-90, new Vector3(1,0,0)));
+            canPoop = false;
         }
     }
 }
