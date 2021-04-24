@@ -6,22 +6,23 @@ using UnityEngine.WSA;
 public class GameManager : MonoBehaviour
 {
     public GameObject player;
+    public Rigidbody rb;
     public GameObject roadTile;
-    [SerializeField] int roadTileCount = 10;
     [SerializeField] Vector3 roadSpawnpos;
     [SerializeField] public static float tileSpeed = 500f;
     [SerializeField] public static float maxDistanceMod = 3f;
+    [SerializeField] float timeToStart;
+    private float currentTime;
     
     
     // Start is called before the first frame update
     void Awake()
     {
+        
+        currentTime = 0f;
         var roadLength = roadTile.transform.GetComponent<BoxCollider>().size.z;
         print("ROADLENGTH: "+roadLength);
-        
-        var roadSpawnposNew = roadSpawnpos;
 
-        
         //spawn road tiles
         InvokeRepeating(nameof(SpawnRoads), 0f, 0.5f);
         
@@ -33,7 +34,9 @@ public class GameManager : MonoBehaviour
         //spawn player
         var playerSpawnpos = new Vector3(0, player.transform.GetComponent<BoxCollider>().bounds.size.y, 0);
         player = Instantiate(player, playerSpawnpos, Quaternion.identity);
-        
+
+        rb = player.GetComponent<Rigidbody>();
+        rb.useGravity = false;
     }
 
     private void SpawnRoads()
@@ -46,7 +49,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        currentTime += Time.deltaTime;
+        // print(currentDuration);
+        if (currentTime > timeToStart){
+            StartRace();
+        }
     }
 
+    private void StartRace()
+    {
+        rb.useGravity = true;
+    }
 }

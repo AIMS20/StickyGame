@@ -88,6 +88,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6756655520058813097, guid: 95c87f0013a8edd45bcab59c04beaa71, type: 3}
+  rb: {fileID: 0}
   roadTile: {fileID: 8705768015760127159, guid: 0939b1afbcafaf4439a4e81d6b8ad464, type: 3}
   roadTileCount: 5
   roadSpawnpos: {x: 0, y: 0, z: -25}
+  timeToStart: 5
