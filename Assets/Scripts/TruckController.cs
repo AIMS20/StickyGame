@@ -13,8 +13,8 @@ public class TruckController : MonoBehaviour
     private float axisInput;
     [SerializeField] public GameObject poopSpawnObj;
     [SerializeField] public Vector3 poopSpawn;
-    [SerializeField] private float turnStrength;
-    [SerializeField] private float rotateStrength;
+    [SerializeField] private float moveStrength;
+    [SerializeField] private float rotateDamper;
     
     [SerializeField] List<Transform> tyres;
     // [SerializeField] List<Rigidbody> FrontTyresRB;
@@ -27,7 +27,6 @@ public class TruckController : MonoBehaviour
         truck = gameObject;
         rb = truck.transform.GetComponent<Rigidbody>();
 
-        poopSpawn = poopSpawnObj.transform.position; //TODO: fix me
         print(poopSpawn);
         // FrontTyresRB.Add(tyres[2].GetComponent<Rigidbody>());
         // FrontTyresRB.Add(tyres[3].GetComponent<Rigidbody>());
@@ -36,10 +35,15 @@ public class TruckController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdateInput();
-        SpinTires();
+        SpinTires(); 
+    }
+    
+    void Update()
+    {
+        poopSpawn = poopSpawnObj.transform.position;
     }
 
     private void SpinTires()
@@ -65,8 +69,8 @@ public class TruckController : MonoBehaviour
         // }
 
   
-        rb.AddForce(new Vector3(-axisInput * turnStrength, 0, 0));
-        truck.transform.Rotate(new Vector3(0, axisInput / rotateStrength, 0));
+        rb.AddForce(new Vector3(-axisInput * moveStrength, 0, 0));
+        truck.transform.Rotate(new Vector3(0, axisInput / rotateDamper, 0));
             
         
 
