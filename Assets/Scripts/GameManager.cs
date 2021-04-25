@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Globalization;
 using System.Timers;
 using UnityEngine;
-using UnityEngine.U2D;
-using UnityEngine.WSA;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,16 +25,17 @@ public class GameManager : MonoBehaviour
     public Transform curbR;
     public Transform curbL;
     public GameObject camTarget;
-    [SerializeField] Vector3 roadSpawnpos;
+    [SerializeField] Vector3 roadSpawnposOffset;
     [SerializeField] public static float tileSpeed = 500f;
     [SerializeField] public float tileSpawnSpeed = 1.05f;
-    [SerializeField] public static float maxDistanceMod = 3f;
+    [SerializeField] public static float maxDistanceMod = 4f;
     
     //time
     [SerializeField] float timeToStart;
     [NonSerialized] public float currentTime;
     private float t;
     private static bool gameStarted;
+    [NonSerialized] public static float moveSpeed = 0.1f;
     [NonSerialized] public static bool gameEnded;
     [NonSerialized] public static bool gameOver; //Todo: refactor
     private SimpleHelvetica timer;
@@ -80,7 +79,7 @@ public class GameManager : MonoBehaviour
 
         //spawn police cars
         policeCars = new List<GameObject>();
-        policeSpawnpos = playerSpawnpos + new Vector3(12, policeCar.transform.GetComponent<BoxCollider>().bounds.size.y*2, 20);
+        policeSpawnpos = playerSpawnpos + new Vector3(12, 1f, 20);
 
         InvokeRepeating(nameof(SpawnPoliceCars), 0f, policeSpawnRate);
 
@@ -89,7 +88,7 @@ public class GameManager : MonoBehaviour
     private void SpawnRoads()
     {
         // print("ROAD SPAWN POS: "+roadSpawnpos);
-        Instantiate(roadTile, roadSpawnpos, Quaternion.identity);
+        Instantiate(roadTile, roadSpawnposOffset, Quaternion.identity);
         
     }
     
@@ -119,6 +118,8 @@ public class GameManager : MonoBehaviour
     {
         if (gameOver) return;
         
+        moveSpeed += 0.00025f;
+
         //update followcam
         camTarget.transform.position = player.transform.position;
         
@@ -143,6 +144,11 @@ public class GameManager : MonoBehaviour
         if (gameEnded)
         {
             EndRace();
+            if (Input.GetButtonDown("Restart"))
+            {
+                SceneManager.LoadScene("Sticky1");
+            }
+
         }
     }
 
@@ -156,7 +162,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         timer.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 5, gameObject.transform.position.z);
-        timer.Text = "They got you!\nHighscore: "+currentTime;
+        timer.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f); //TODO: magic numba
+        timer.Text = "They got you!\nHighscore: "+(int)currentTime;
         timer.GenerateText();
         print("----ENDGAME----");
         gameOver = true;

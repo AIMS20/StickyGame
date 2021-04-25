@@ -6,6 +6,7 @@ public class PoopController : MonoBehaviour
 {
     private GameObject poop;
     private Rigidbody rb;
+    [SerializeField] public static float poopHitForce = 15f;
     
     [SerializeField] private float poopForce = 5f;
     

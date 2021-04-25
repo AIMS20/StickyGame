@@ -13,6 +13,8 @@ public class PoliceCarController : MonoBehaviour
     [SerializeField] public float despawnDistance = 10f;
     
     private GameObject policeCar;
+    private Color poopBrown;
+    private Renderer policeCarMat;
     private Vector3 policeCarPos;
     private Rigidbody rb;
     private BoxCollider mainCollider;
@@ -29,10 +31,11 @@ public class PoliceCarController : MonoBehaviour
         policeCar = gameObject;
         rb = policeCar.GetComponent<Rigidbody>();
         mainCollider = policeCar.GetComponent<BoxCollider>();
-
+        poopBrown = new Color(123f/255f, 69f/255f, 27f/255f);
         moveGoal = player.transform.Find("Animal");
-        endGoal = new Vector3(moveGoal.transform.position.x, moveGoal.transform.position.y,  moveGoal.transform.localPosition.z - 2f);
-
+        endGoal = new Vector3(moveGoal.transform.position.x, moveGoal.transform.position.y,
+            moveGoal.transform.localPosition.z - 2f);
+        policeCarMat = policeCar.transform.GetChild(0).transform.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -66,7 +69,7 @@ public class PoliceCarController : MonoBehaviour
         policeCar.transform.position = Vector3.MoveTowards(policeCarPos, currentGoal, step);
         
         //increase speed
-        moveSpeed += 0.0025f;
+        moveSpeed = GameManager.moveSpeed;
         // print("cops speed"+moveSpeed);
 
         if (isAttacking || isHit){ //TODO: is hit by poop or player...
@@ -87,7 +90,11 @@ public class PoliceCarController : MonoBehaviour
         if (other.gameObject.CompareTag("Poop"))
         {
             other.transform.GetComponent<Rigidbody>().isKinematic = false;
+            other.transform.position += policeCar.transform.position;
             isHit = true;
+            policeCarMat.material.color = poopBrown;
+            rb.AddForce(new Vector3(0,0,PoopController.poopHitForce));
+            moveSpeed = -3f;
         }
     }
 

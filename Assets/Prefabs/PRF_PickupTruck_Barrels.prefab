@@ -1021,10 +1021,11 @@ MonoBehaviour:
   - {fileID: 1157682640472824528}
   poopMessages:
   - i could really poop right now
-  - shitter's clogged.
-  - oh i'm so ready
+  - shitter's a bit clogged.
+  - oh i'm so ready for this
   - here comes a big one
   - i hope their windows are closed
+  - '                      enjoy.'
 --- !u!114 &2442113223468719097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,7 +1294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1893421106479518220, guid: 53153ab7b0ca3c243bf15f94f8e1f19d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.357
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 6771154308078234488, guid: 53153ab7b0ca3c243bf15f94f8e1f19d, type: 3}
       propertyPath: m_RootOrder
@@ -1412,7 +1413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 704178731807167808, guid: 3df3a5f6ed655f340ab1692a6f851d5e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.79996
+      value: 3.13
       objectReference: {fileID: 0}
     - target: {fileID: 704178731807167808, guid: 3df3a5f6ed655f340ab1692a6f851d5e, type: 3}
       propertyPath: m_LocalRotation.w
