@@ -97,6 +97,6 @@ MonoBehaviour:
   curbR: {fileID: 0}
   curbL: {fileID: 0}
   camTarget: {fileID: 0}
-  roadSpawnpos: {x: 0, y: 0, z: -25}
+  roadSpawnposOffset: {x: 0, y: 0, z: -35}
   tileSpawnSpeed: 0.95
   timeToStart: 5
