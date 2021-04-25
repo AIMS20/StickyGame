@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using Cinemachine.Utility;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TruckController : MonoBehaviour
 {
@@ -15,6 +18,7 @@ public class TruckController : MonoBehaviour
     [SerializeField] private float moveStrength;
     [SerializeField] private float rotateDamper;
     [SerializeField] List<Transform> tyres;
+    [SerializeField] List<String> poopMessages;
     
     // [SerializeField] List<Rigidbody> FrontTyresRB; //TODO: use to rotate front wheels in axis with maxturn
     
@@ -24,6 +28,10 @@ public class TruckController : MonoBehaviour
     private float currentCooldown;
     private float rotationSpeed = 5f;
     private bool canPoop;
+    private SimpleHelvetica poopTimer;
+    private float t;
+    private float rotationClamp;
+    private bool messageIsShown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,24 +43,57 @@ public class TruckController : MonoBehaviour
         // FrontTyresRB.Add(tyres[2].GetComponent<Rigidbody>());
         // FrontTyresRB.Add(tyres[3].GetComponent<Rigidbody>());
         //
-        
+
+        currentCooldown = poopCooldown;
+        poopTimer = truck.GetComponentInChildren<SimpleHelvetica>();
+        poopTimer.Text = "test";
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        UpdateInput();
         SpinTires(); 
     }
     
     void Update()
     {
+        UpdateInput();
         poopSpawn = poopSpawnObj.transform.position;
         currentCooldown -= Time.deltaTime;
 
-        if (currentCooldown <= 0){
+        PoopLogic();
+
+        //rotation max //TODO
+        // transform.Rotate(0, 0, -truck.transform.localRotation.y, Space.Self);
+        // var transformEulerAngles = truck.transform.eulerAngles;
+        // transformEulerAngles.y = Mathf.Clamp(transform.eulerAngles.y, -maxTurn, maxTurn);
+        // truck.transform.Rotate(transformEulerAngles);
+    }
+
+    private void PoopLogic()
+    {
+        if (currentCooldown <= 0)
+        {
             canPoop = true;
             currentCooldown = poopCooldown;
+        }
+
+        if (!canPoop)
+        {
+            t = (int) currentCooldown;
+            poopTimer.transform.localPosition = new Vector3(-0.2f, 3f, 0);
+            poopTimer.Text = $"{t.ToString(CultureInfo.CurrentCulture)}";
+            poopTimer.GenerateText();
+        }
+
+        if (canPoop && !messageIsShown) //TODO: fix this dirty shit
+        {
+            {
+                poopTimer.transform.localPosition = new Vector3(10f, 3f, 0);
+                poopTimer.Text = poopMessages[Random.Range(0, poopMessages.Count)];
+            }
+            poopTimer.GenerateText();
+            messageIsShown = true;
         }
     }
 
@@ -92,6 +133,7 @@ public class TruckController : MonoBehaviour
                 
             Instantiate(poop, poopSpawn, Quaternion.AngleAxis(-90, new Vector3(1,0,0)));
             canPoop = false;
+            messageIsShown = false; 
         }
     }
 }
