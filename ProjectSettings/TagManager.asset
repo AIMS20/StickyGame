@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Poop
+  - GamestateObjects
+  - MenustateObjects
   layers:
   - Default
   - TransparentFX
