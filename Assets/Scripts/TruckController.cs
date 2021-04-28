@@ -31,7 +31,7 @@ public class TruckController : MonoBehaviour
     private SimpleHelvetica poopTimer;
     private float t;
     private float rotationClamp;
-    private bool messageIsShown = false;
+    public static bool messageIsShown = false;
 
     // Start is called before the first frame update
     void Start()

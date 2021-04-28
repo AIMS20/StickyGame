@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
+    public static GameManager Instance => instance; //get return
+
     //player
     public GameObject player;
     [NonSerialized] public Rigidbody rb;
@@ -18,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int policeCarsMax = 5;
     [SerializeField] public float policeSpawnRate = 10f;
     [SerializeField] Vector3 policeSpawnpos;
+    public float moveSpeed { get; private set; } //TODO: find out how to serialize
     
     //road
     public GameObject roadTile;
@@ -35,7 +39,6 @@ public class GameManager : MonoBehaviour
     [NonSerialized] public float currentTime;
     private float t;
     private static bool gameStarted;
-    [NonSerialized] public static float moveSpeed = 0.1f;
     [NonSerialized] public static bool gameEnded;
     [NonSerialized] public static bool gameOver; //Todo: refactor
     private SimpleHelvetica timer;
@@ -46,7 +49,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        
+        InstanceCheck();
+
+        moveSpeed = 0.15f;
         currentTime = 0f;
         gameStarted = false;
         gameEnded = false;
@@ -65,12 +70,6 @@ public class GameManager : MonoBehaviour
         //spawn road tiles
         InvokeRepeating(nameof(SpawnRoads), 0f, tileSpawnSpeed);
         
-        
-        // for (var i = 0; i < roadTileCount; i++)
-        // {
-        //     roadSpawnposNew = new Vector3(0, 0, roadSpawnposNew.z-roadLength);
-        // }
-        
         //spawn player
         var playerSpawnpos = new Vector3(0, player.transform.GetComponent<BoxCollider>().bounds.size.y, 0);
         player = Instantiate(player, playerSpawnpos, Quaternion.identity);
@@ -83,6 +82,17 @@ public class GameManager : MonoBehaviour
 
         InvokeRepeating(nameof(SpawnPoliceCars), 0f, policeSpawnRate);
 
+    }
+
+    private void InstanceCheck()
+    {
+        if (instance != null && instance != this){
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
     }
 
     private void SpawnRoads()
@@ -116,12 +126,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameOver) return;
+        if (gameOver) return; //TODO: refactor this dirty trick
         
         moveSpeed += 0.00025f;
 
         //update followcam
+        if (!gameEnded)
+        {
         camTarget.transform.position = player.transform.position;
+            
+        }
         
         //start race after x 
         currentTime += Time.deltaTime;
@@ -143,6 +157,7 @@ public class GameManager : MonoBehaviour
 
         if (gameEnded)
         {
+
             EndRace();
             if (Input.GetButtonDown("Restart"))
             {
@@ -158,13 +173,18 @@ public class GameManager : MonoBehaviour
         gameStarted = true;
     }
 
-    private void EndRace()
+    private void EndRace() //TODO: magic numbas
     {
-        Time.timeScale = 0f;
-        timer.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 5, gameObject.transform.position.z);
-        timer.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f); //TODO: magic numba
+        // Time.timeScale = 0f;
+        var timerTransform = timer.transform;
+
+        timerTransform.position = player.transform.position + new Vector3(0, 5, 0);
+        timerTransform.localScale = new Vector3(0.065f, 0.065f, 0.065f); 
+        camTarget.transform.position = timerTransform.position;
+        
         timer.Text = "They got you!\nHighscore: "+(int)currentTime;
         timer.GenerateText();
+        TruckController.messageIsShown = true;
         print("----ENDGAME----");
         gameOver = true;
     }

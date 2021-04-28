@@ -69,7 +69,7 @@ public class PoliceCarController : MonoBehaviour
         policeCar.transform.position = Vector3.MoveTowards(policeCarPos, currentGoal, step);
         
         //increase speed
-        moveSpeed = GameManager.moveSpeed;
+        moveSpeed = GameManager.Instance.moveSpeed;
         // print("cops speed"+moveSpeed);
 
         if (isAttacking || isHit){ //TODO: is hit by poop or player...
