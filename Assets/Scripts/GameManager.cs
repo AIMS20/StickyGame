@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour
     public GameObject policeCar;
     private List<GameObject> policeCars;
     [SerializeField] public int policeCarsMax = 5;
-    [SerializeField] public float policeSpawnRate = 10f;
-    [SerializeField] Vector3 policeSpawnpos;
-    public float moveSpeed { get; private set; } //TODO: find out how to serialize
+    [SerializeField] public float policeSpawnSeconds = 10f;
+    [SerializeField] Vector3 policeSpawnposOffset;
+    public float policeMoveSpeed { get; private set; } //TODO: find out how to serialize
     
     //road
     public GameObject roadTile;
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         InstanceCheck();
 
-        moveSpeed = 0.15f;
+        policeMoveSpeed = 0.25f;
         currentTime = 0f;
         gameStarted = false;
         gameEnded = false;
@@ -78,9 +78,9 @@ public class GameManager : MonoBehaviour
 
         //spawn police cars
         policeCars = new List<GameObject>();
-        policeSpawnpos = playerSpawnpos + new Vector3(12, 1f, 20);
+        policeSpawnposOffset = playerSpawnpos + policeSpawnposOffset;
 
-        InvokeRepeating(nameof(SpawnPoliceCars), 0f, policeSpawnRate);
+        InvokeRepeating(nameof(SpawnPoliceCars), 0f, policeSpawnSeconds);
 
     }
 
@@ -104,23 +104,22 @@ public class GameManager : MonoBehaviour
     
     private void SpawnPoliceCars()
     {
-        policeSpawnpos.x -= 4; //TODO: policecar width instead
+        policeSpawnposOffset.x -= 4; //TODO: policecar width instead
         
-        print("TEST: "+policeSpawnpos.x);
+        // print("TEST: "+policeSpawnpos.x);
         
         //reset spawn
-        if (policeSpawnpos.x <= -12) //TODO: fix hardcoding
+        if (policeSpawnposOffset.x <= -12) //TODO: fix hardcoding
         {
-            policeSpawnpos.x = 12;
-            policeSpawnpos.z += 5;
+            policeSpawnposOffset.x = 12;
+            policeSpawnposOffset.z += 5;
         }
 
         
-        if (policeCars.Count < policeCarsMax || policeCarsMax == 0){ //TODO: increment to up difficulty
-            policeCars.Add(Instantiate(policeCar, policeSpawnpos,Quaternion.AngleAxis(-180, new Vector3(0,1,0))));
-            print("SPAWNING POLICE CAR AT "+policeSpawnpos);
+        if (policeCars.Count < policeCarsMax || policeCarsMax == 0){ 
+            policeCars.Add(Instantiate(policeCar, policeSpawnposOffset,Quaternion.AngleAxis(-180, new Vector3(0,1,0))));
+            // print("SPAWNING POLICE CAR AT "+policeSpawnpos);
         }
-        
     }
 
     // Update is called once per frame
@@ -128,12 +127,13 @@ public class GameManager : MonoBehaviour
     {
         if (gameOver) return; //TODO: refactor this dirty trick
         
-        moveSpeed += 0.00025f;
+        policeMoveSpeed += 0.00025f;
+        print("curr police speed: "+policeMoveSpeed);
 
-        //update followcam
+        //update follow cam
         if (!gameEnded)
         {
-        camTarget.transform.position = player.transform.position;
+            camTarget.transform.position = player.transform.position;
             
         }
         
@@ -178,9 +178,9 @@ public class GameManager : MonoBehaviour
         // Time.timeScale = 0f;
         var timerTransform = timer.transform;
 
-        timerTransform.position = player.transform.position + new Vector3(0, 5, 0);
-        timerTransform.localScale = new Vector3(0.065f, 0.065f, 0.065f); 
-        camTarget.transform.position = timerTransform.position;
+        timerTransform.position = new Vector3(0, 5, 0);
+        timerTransform.localScale = new Vector3(0.08f, 0.08f, 0.08f);
+        camTarget.transform.position = timerTransform.position + new Vector3(-5, 0, 0);
         
         timer.Text = "They got you!\nHighscore: "+(int)currentTime;
         timer.GenerateText();

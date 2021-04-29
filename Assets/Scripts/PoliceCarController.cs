@@ -1,107 +1,184 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
 
 public class PoliceCarController : MonoBehaviour
 {
     public GameObject player;
+    public TruckController truckController;
+    public List<Transform> tyres;
+    
 
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] public float despawnDistance = 10f;
-    
+    [SerializeField] public float pushAttackDist = 2f;
+    [SerializeField] public float defeatAttackDist = 0.5f;
+
     private GameObject policeCar;
     private Color poopBrown;
     private Renderer policeCarMat;
     private Vector3 policeCarPos;
     private Rigidbody rb;
-    private BoxCollider mainCollider;
-    private Transform moveGoal;
-    private Vector3 endGoal;
+    private Collider coll;
+    private Vector3 chaseGoalPos;
+    private Vector3 endGoalPos;
     private Vector3 currentGoal;
-    private bool isAttacking = false;
-    private bool isHit = false;
+
+    public enum Modes{
+        PUSH, DEFEATPLAYER, HIT
+    }
+
+    private Modes modeMode;
     
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        
+        chaseGoalPos = player.transform.position;
+        
         policeCar = gameObject;
         rb = policeCar.GetComponent<Rigidbody>();
-        mainCollider = policeCar.GetComponent<BoxCollider>();
-        poopBrown = new Color(123f/255f, 69f/255f, 27f/255f);
-        moveGoal = player.transform.Find("Animal");
-        endGoal = new Vector3(moveGoal.transform.position.x, moveGoal.transform.position.y,
-            moveGoal.transform.localPosition.z - 2f);
+        coll = policeCar.GetComponent<BoxCollider>();
+        
         policeCarMat = policeCar.transform.GetChild(0).transform.GetComponent<Renderer>();
+        poopBrown = new Color(123f/255f, 69f/255f, 27f/255f);
+
+        //initial speed which increases with gametime
+        moveSpeed = GameManager.Instance.policeMoveSpeed; //TODO: refactor
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        truckController.SpinTires(tyres);
+        
+        UpdatePositions();
 
-        policeCarPos = policeCar.transform.position;
-        var step = moveSpeed * Time.deltaTime;
-
-        if (!isAttacking){
-            currentGoal = moveGoal.position;
-        }
-        else{
-            currentGoal = endGoal;
-        }
- 
-        if (policeCar.transform.position.z <= moveGoal.position.z)
+        
+        //TODO: iterate through enums instead? readability would suck tho
+        switch (modeMode)
         {
-            print("POLICE IN REACH");
-            isAttacking = true;
-            moveSpeed += 0.001f;
+            //try to get in front of player
+            case Modes.PUSH: //TODO: add swaying from side to side
+                // print("PUSH MODE");
+                PushMode();
+                break;
+            
+            //being hit by player or poop
+            case Modes.HIT:
+                // print("HIT MODE");
+                HitMode();
+                break;
+            
+            //got in front of player
+            case Modes.DEFEATPLAYER:
+                // print("DEFEAT MODE");
+                StartCoroutine(nameof(EndChase));
+                break;
+            
+            //chase player until close enough to change into PUSH mode
+            default:
+                DefaultMode();
+                break;
         }
         
-        if (policeCar.transform.position.z < currentGoal.z)
-        {
-            print("POLICE GOT YOU");
-            StartCoroutine(nameof(EndChase));
-
-        }
-
-        policeCar.transform.position = Vector3.MoveTowards(policeCarPos, currentGoal, step);
         
-        //increase speed
-        moveSpeed = GameManager.Instance.moveSpeed;
-        // print("cops speed"+moveSpeed);
 
-        if (isAttacking || isHit){ //TODO: is hit by poop or player...
-            if (Vector3.Distance(policeCarPos, moveGoal.position) > despawnDistance)
-            {
-                StartCoroutine((DestroyCar(policeCar)));
-            }
+    }
+
+    public void DefaultMode()
+    {
+        currentGoal = chaseGoalPos;
+        if (Vector3.Distance(policeCarPos, currentGoal) <= pushAttackDist)
+        {
+            modeMode = Modes.PUSH;
         }
     }
+
+    private void HitMode()
+    {
+        //slow down
+        moveSpeed -= 0.5f;
+
+        if (Vector3.Distance(policeCarPos, chaseGoalPos) > despawnDistance){
+            StartCoroutine(DestroyCar(policeCar));
+        }
+    }
+
+    private IEnumerator SwayToSides()
+    {
+        yield return new WaitForSeconds(0);
+        rb.transform.localEulerAngles += new Vector3(0f, Random.Range(-25f, 25f), 0f);
+    }
+
+    private void PushMode()
+    {
+        currentGoal = endGoalPos;
+        moveSpeed += 0.001f;
+
+        if (Vector3.Distance(policeCarPos, currentGoal) < defeatAttackDist)
+        {
+            modeMode = Modes.DEFEATPLAYER;
+        }
+    }
+
+    private void UpdatePositions()
+    {
+        var step = moveSpeed * Time.deltaTime;
+
+        chaseGoalPos = player.transform.position;
+        policeCarPos = policeCar.transform.position;
+        endGoalPos = chaseGoalPos + new Vector3(0, 0, -coll.bounds.size.z * 1.5f);
+        
+        //move to current goal
+        policeCar.transform.position = Vector3.MoveTowards(policeCarPos, currentGoal, step);
+    }
+    
+
 
 
     private void OnCollisionEnter(Collision other){
         if (other.gameObject.CompareTag("Player") ){
-            print("THIS IS MY NO-NO SQUARE");
-            isHit = true;
+            // attackMode = Attacks.HIT;
         }
 
         if (other.gameObject.CompareTag("Poop"))
         {
-            other.transform.GetComponent<Rigidbody>().isKinematic = false;
-            other.transform.position += policeCar.transform.position;
-            isHit = true;
+            var poop = other.transform;
+            // poop.GetComponent<Rigidbody>().isKinematic = true;
+            
+            rb.AddExplosionForce(PoopController.poopExplForce, poop.position, 1f, 20f );
+            rb.AddForce(new Vector3(0, 0, PoopController.poopHitForce)); //TODO:  test
+            
+            //attach poop
+            poop.position += policeCar.transform.position;
+            
+            //change mat
             policeCarMat.material.color = poopBrown;
-            rb.AddForce(new Vector3(0,0,PoopController.poopHitForce));
-            moveSpeed = -3f;
+            
+            //unconstrain except for y rot
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezePositionY;
+            
+            //sway from side to side
+            InvokeRepeating(nameof(SwayToSides), 0, 0.15f);
+            
+            modeMode = Modes.HIT;
         }
     }
 
     IEnumerator DestroyCar(GameObject car)
     {
         yield return new WaitForSeconds(3);
-        print("DESTROYING");
+        // print("DESTROYING" + car);
         Destroy(car);
         
     }  
