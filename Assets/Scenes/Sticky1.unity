@@ -3869,7 +3869,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846799790}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.86, y: 0, z: -53.6}
+  m_LocalPosition: {x: -2.86, y: 0, z: -48.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1612360095}
@@ -4554,8 +4554,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944303194}
-  m_LocalRotation: {x: 0.15174274, y: 0.83095235, z: -0.27435687, w: 0.45958748}
-  m_LocalPosition: {x: -1.0654936, y: 2.944264, z: 7.783969}
+  m_LocalRotation: {x: 0.19179632, y: 0.7811916, z: -0.28849438, w: 0.51935047}
+  m_LocalPosition: {x: -1.0654936, y: 3.444264, z: 8.783969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5757,8 +5757,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188737203}
-  m_LocalRotation: {x: 0.15174274, y: 0.83095235, z: -0.27435687, w: 0.45958748}
-  m_LocalPosition: {x: -1.0654936, y: 2.944264, z: 7.783969}
+  m_LocalRotation: {x: 0.19179632, y: 0.7811916, z: -0.28849438, w: 0.51935047}
+  m_LocalPosition: {x: -1.0654936, y: 3.444264, z: 8.783969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1275556603}
@@ -6237,7 +6237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 2
-  m_FollowOffset: {x: -7.05, y: 8.5, z: 10.5}
+  m_FollowOffset: {x: -7.05, y: 9, z: 11.5}
   m_XDamping: 5
   m_YDamping: 5
   m_ZDamping: 5
@@ -6258,13 +6258,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 2.5, y: 0, z: 4.5}
+  m_TrackedObjectOffset: {x: 2.5, y: 0, z: 7.5}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 13.6
   m_VerticalDamping: 13.5
-  m_ScreenX: 0.5004585
+  m_ScreenX: 0.4994339
   m_ScreenY: 0.5079393
   m_DeadZoneWidth: 0.8
   m_DeadZoneHeight: 0.8

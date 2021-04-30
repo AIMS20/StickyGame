@@ -188,7 +188,7 @@ public class PoliceCarController : MonoBehaviour
         yield return new WaitForSeconds(3);
         DestroyCar(player);
 
-        GameManager.gameEnded = true;
+        GameManager.gameOver = true;
         DestroyCar(policeCar);
 
     }

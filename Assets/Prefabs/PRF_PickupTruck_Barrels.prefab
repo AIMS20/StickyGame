@@ -1010,10 +1010,11 @@ MonoBehaviour:
   poop: {fileID: 7126029466343701705, guid: c7f01119ebd87a74a9435bf601212efe, type: 3}
   maxTurn: 35
   poopSpawnObj: {fileID: 8387173531910572228}
+  gameManager: {fileID: 5969801314486088461, guid: b2471fba733ff3040a75cce1ebdf90be, type: 3}
   poopSpawn: {x: 0, y: 0, z: 0}
   poopCooldown: 5
   moveStrength: 1250
-  rotateDamper: 1.25
+  inputAxisMod: 50
   tyres:
   - {fileID: 8356990137067563751}
   - {fileID: 5557123463657607676}
@@ -1302,15 +1303,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6771154308078234488, guid: 53153ab7b0ca3c243bf15f94f8e1f19d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.1484113
+      value: 2.404072
       objectReference: {fileID: 0}
     - target: {fileID: 6771154308078234488, guid: 53153ab7b0ca3c243bf15f94f8e1f19d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.1484113
+      value: 2.404072
       objectReference: {fileID: 0}
     - target: {fileID: 6771154308078234488, guid: 53153ab7b0ca3c243bf15f94f8e1f19d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.1484113
+      value: 2.404072
       objectReference: {fileID: 0}
     - target: {fileID: 6771154308078234488, guid: 53153ab7b0ca3c243bf15f94f8e1f19d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1318,11 +1319,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6771154308078234488, guid: 53153ab7b0ca3c243bf15f94f8e1f19d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.972
+      value: 0.994
       objectReference: {fileID: 0}
     - target: {fileID: 6771154308078234488, guid: 53153ab7b0ca3c243bf15f94f8e1f19d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.0309
+      value: 3.0353
       objectReference: {fileID: 0}
     - target: {fileID: 6771154308078234488, guid: 53153ab7b0ca3c243bf15f94f8e1f19d, type: 3}
       propertyPath: m_LocalRotation.w

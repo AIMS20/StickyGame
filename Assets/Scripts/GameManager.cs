@@ -31,15 +31,14 @@ public class GameManager : MonoBehaviour
     public GameObject camTarget;
     [SerializeField] Vector3 roadSpawnposOffset;
     [SerializeField] public static float tileSpeed = 500f;
-    [SerializeField] public float tileSpawnSpeed = 1.05f;
-    [SerializeField] public static float maxDistanceMod = 4f;
+    [SerializeField] public float tileSpawnSeconds = 0.95f;
+    [SerializeField] public static float maxDistanceMod = 6f;
     
     //time
     [SerializeField] float timeToStart;
     [NonSerialized] public float currentTime;
     private float t;
     private static bool gameStarted;
-    [NonSerialized] public static bool gameEnded;
     [NonSerialized] public static bool gameOver; //Todo: refactor
     private SimpleHelvetica timer;
 
@@ -54,33 +53,39 @@ public class GameManager : MonoBehaviour
         policeMoveSpeed = 0.25f;
         currentTime = 0f;
         gameStarted = false;
-        gameEnded = false;
         timer = gameObject.GetComponentInChildren<SimpleHelvetica>();
 
-        int tmp = (int)timeToStart;
-        timer.Text = tmp.ToString();
+        //initialize timer
+        timer.Text = "0";
         timer.GenerateText();
         
         var roadLength = roadTile.transform.GetComponent<BoxCollider>().size.z;
-        print("ROADLENGTH: "+roadLength);
+        // print("ROADLENGTH: "+roadLength);
         roadTileCollider = roadTile.GetComponent<BoxCollider>();
         curbR = roadTile.transform.GetChild(0); //TODO: make relative
         curbL = roadTile.transform.GetChild(1);
 
         //spawn road tiles
-        InvokeRepeating(nameof(SpawnRoads), 0f, tileSpawnSpeed);
+        InvokeRepeating(nameof(SpawnRoads), 0f, tileSpawnSeconds);
         
         //spawn player
         var playerSpawnpos = new Vector3(0, player.transform.GetComponent<BoxCollider>().bounds.size.y, 0);
         player = Instantiate(player, playerSpawnpos, Quaternion.identity);
         rb = player.GetComponent<Rigidbody>();
         rb.useGravity = false;
+        
+        // rb.constraints = RigidbodyConstraints.FreezeAll; //TODO: fix with correct rotation
 
         //spawn police cars
         policeCars = new List<GameObject>();
         policeSpawnposOffset = playerSpawnpos + policeSpawnposOffset;
 
         InvokeRepeating(nameof(SpawnPoliceCars), 0f, policeSpawnSeconds);
+
+    }
+
+    private void Start(){
+        Invoke("StartRace", timeToStart);
 
     }
 
@@ -117,7 +122,7 @@ public class GameManager : MonoBehaviour
 
         
         if (policeCars.Count < policeCarsMax || policeCarsMax == 0){ 
-            policeCars.Add(Instantiate(policeCar, policeSpawnposOffset,Quaternion.AngleAxis(-180, new Vector3(0,1,0))));
+            policeCars.Add(Instantiate(policeCar, policeSpawnposOffset,Quaternion.AngleAxis(-180, new Vector3(0,1.25f,0))));
             // print("SPAWNING POLICE CAR AT "+policeSpawnpos);
         }
     }
@@ -125,56 +130,57 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameOver) return; //TODO: refactor this dirty trick
         
-        policeMoveSpeed += 0.00025f;
-        print("curr police speed: "+policeMoveSpeed);
-
-        //update follow cam
-        if (!gameEnded)
+        if (!gameOver)
         {
-            camTarget.transform.position = player.transform.position;
-            
+            UpdateTimer();
+            UpdateCamTarget();
+            UpdatePoliceSpeed();
         }
-        
-        //start race after x 
-        currentTime += Time.deltaTime;
-        if (currentTime > timeToStart){
-            StartRace();
-        }
+    }
 
+    private void UpdatePoliceSpeed()
+    {
+        policeMoveSpeed += 0.00025f;
+        // print("curr police speed: "+policeMoveSpeed);
+
+    }
+
+    private void UpdateTimer()
+    {
         if (!gameStarted)
         {
-            t = (int)timeToStart - Time.deltaTime;
+            t = (int) timeToStart - Time.deltaTime;
         }
         else
         {
-            t = (int)currentTime;
-
+            currentTime += Time.deltaTime;
+            t = (int) currentTime;
         }
+
         timer.Text = $"{t.ToString(CultureInfo.CurrentCulture)}";
         timer.GenerateText();
+    }
 
-        if (gameEnded)
-        {
-
-            EndRace();
-            if (Input.GetButtonDown("Restart"))
-            {
-                SceneManager.LoadScene("Sticky1");
-            }
-
-        }
+    private void UpdateCamTarget()
+    {
+        camTarget.transform.position = player.transform.position;
     }
 
     private void StartRace()
     {
-        rb.useGravity = true;
+        //unfreeze pos X and rot y
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ |
+                         RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        
         gameStarted = true;
     }
 
-    private void EndRace() //TODO: magic numbas
+    public void EndRace() //TODO: magic numbas
     {
+        if (gameOver) return;
+        
         // Time.timeScale = 0f;
         var timerTransform = timer.transform;
 

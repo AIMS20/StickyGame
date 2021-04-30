@@ -98,8 +98,8 @@ MonoBehaviour:
   curbR: {fileID: 0}
   curbL: {fileID: 0}
   camTarget: {fileID: 0}
-  roadSpawnposOffset: {x: 0, y: 0, z: -35}
-  tileSpawnSpeed: 0.95
+  roadSpawnposOffset: {x: 0, y: 0, z: -55}
+  tileSpawnSeconds: 0.95
   timeToStart: 5
 --- !u!82 &2370969665595545837
 AudioSource:
