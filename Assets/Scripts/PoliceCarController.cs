@@ -111,12 +111,13 @@ public class PoliceCarController : MonoBehaviour
         if (Vector3.Distance(policeCarPos, chaseGoalPos) > despawnDistance){
             StartCoroutine(DestroyCar(policeCar));
         }
+
     }
 
     private IEnumerator SwayToSides()
     {
         yield return new WaitForSeconds(0);
-        rb.transform.localEulerAngles += new Vector3(0f, Random.Range(-25f, 25f), 0f);
+
     }
 
     private void PushMode()
@@ -164,13 +165,12 @@ public class PoliceCarController : MonoBehaviour
             //change mat
             policeCarMat.material.color = poopBrown;
             
-            //unconstrain except for y rot
+            //unconstrain except for y pos
             rb.constraints = RigidbodyConstraints.None;
             rb.constraints = RigidbodyConstraints.FreezePositionY;
             
-            //sway from side to side
-            InvokeRepeating(nameof(SwayToSides), 0, 0.15f);
-            
+            //sway  to side
+            rb.AddTorque(transform.up * Random.Range(-350f, 350f), ForceMode.Impulse); 
             modeMode = Modes.HIT;
         }
     }
