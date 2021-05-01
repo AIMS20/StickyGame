@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Cinemachine.Utility;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class TruckController : MonoBehaviour
@@ -12,11 +13,12 @@ public class TruckController : MonoBehaviour
     [SerializeField] float maxTurn;
     
     [SerializeField] public GameObject poopSpawnObj;
+    [SerializeField] public GameManager gameManager;
     [SerializeField] public Vector3 poopSpawn;
     [SerializeField] private float poopCooldown;
     
     [SerializeField] private float moveStrength;
-    [SerializeField] private float rotateDamper;
+    [SerializeField] private float inputAxisMod;
     [SerializeField] List<Transform> tyres;
     [SerializeField] List<String> poopMessages;
     
@@ -28,10 +30,9 @@ public class TruckController : MonoBehaviour
     private float currentCooldown;
     private float rotationSpeed = 5f;
     private bool canPoop;
+    private bool isDisplayingMsg;
     private SimpleHelvetica poopTimer;
-    private float t;
-    private float rotationClamp;
-    public static bool messageIsShown = false;
+    private float timerText;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,7 @@ public class TruckController : MonoBehaviour
         truck = gameObject;
         rb = truck.transform.GetComponent<Rigidbody>();
 
-        print(poopSpawn);
+        // print(poopSpawn);
         // FrontTyresRB.Add(tyres[2].GetComponent<Rigidbody>());
         // FrontTyresRB.Add(tyres[3].GetComponent<Rigidbody>());
         //
@@ -52,7 +53,7 @@ public class TruckController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        SpinTires(); 
+        SpinTires(tyres); 
     }
     
     void Update()
@@ -72,35 +73,39 @@ public class TruckController : MonoBehaviour
 
     private void PoopLogic()
     {
-        if (currentCooldown <= 0)
+        if (GameManager.gameOver)
         {
+            poopTimer.Text = " ";
+            poopTimer.GenerateText();
+            return;
+        }
+        
+        if (currentCooldown < 1)
+        {
+            if (!isDisplayingMsg)
+            {
+                poopTimer.transform.localPosition = new Vector3(10f, 3f, 1);
+                poopTimer.Text = poopMessages[Random.Range(0, poopMessages.Count)];
+                isDisplayingMsg = true;
+            }
             canPoop = true;
             currentCooldown = poopCooldown;
         }
-
-        if (!canPoop)
+        else if (!canPoop)
         {
-            t = (int) currentCooldown;
-            poopTimer.transform.localPosition = new Vector3(-0.2f, 3f, 0);
-            poopTimer.Text = $"{t.ToString(CultureInfo.CurrentCulture)}";
-            poopTimer.GenerateText();
+            timerText = (int) currentCooldown;
+            poopTimer.transform.localPosition = new Vector3(-0.2f, 3f, 1);
+            poopTimer.Text = $"{timerText.ToString(CultureInfo.CurrentCulture)}";
+            isDisplayingMsg = false;
         }
 
-        if (canPoop && !messageIsShown) //TODO: fix this dirty shit
-        {
-            {
-                poopTimer.transform.localPosition = new Vector3(10f, 3f, 0);
-                poopTimer.Text = poopMessages[Random.Range(0, poopMessages.Count)];
-            }
-            poopTimer.GenerateText();
-            messageIsShown = true;
-        }
+        poopTimer.GenerateText();
     }
 
-    private void SpinTires()
+    public void SpinTires(List<Transform> allTyres)
     {
-        foreach (var tyre in tyres){
-            tyre.transform.Rotate(-rotationSpeed, 0, 0, Space.Self);
+        foreach (var tyre in allTyres){
+            tyre.transform.Rotate(-rotationSpeed * moveStrength/100f, 0, 0, Space.Self);
         }
     }
 
@@ -119,21 +124,32 @@ public class TruckController : MonoBehaviour
         //     axisInput = maxTurn;
         // }
 
-  
-        rb.AddForce(new Vector3(-axisInput * moveStrength, 0, 0));
-        truck.transform.Rotate(new Vector3(0, axisInput / rotateDamper, 0));
-            
+        // var localRot = truck.transform.localRotation.y;
         
+        //move on X
+        rb.AddForce(new Vector3(-axisInput * moveStrength, 0, 0));
 
+        //rotate on Y
+        var localRot = axisInput * inputAxisMod ;
+        truck.transform.Rotate(new Vector3(0,localRot , 0) * Time.deltaTime);
+        
+        // print(truck.transform.localEulerAngles);
+        if (truck.transform.localEulerAngles.y > maxTurn){
+            // truck.transform.LookAt(gameManager.transform); //TODO: slow lookat oder rotate back? -localrot?
+        }
         // print(axisInput);
         
         //spawn poop on A
         if (canPoop &&  Input.GetButtonDown("Poop")){
-            print("POOPING");
+            // print("POOPING");
                 
             Instantiate(poop, poopSpawn, Quaternion.AngleAxis(-90, new Vector3(1,0,0)));
             canPoop = false;
-            messageIsShown = false; 
+        }
+        
+        if (GameManager.gameOver && Input.GetButtonDown("Restart"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

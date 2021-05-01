@@ -21,8 +21,6 @@ public class UIManager : MonoBehaviour
         var playButton = GetButton("Play");
         playButton.onClick.AddListener(PlayClick); //TODO: somehow integrate into GetButton
         
-        var optionsButton = GetButton("Options");
-        optionsButton.onClick.AddListener(OptionsClick);
         
         var quitButton = GetButton("Quit");
         quitButton.onClick.AddListener(QuitClick); //TODO: somehow integrate into GetButton
@@ -39,12 +37,6 @@ public class UIManager : MonoBehaviour
         var button = canvas.Find(name).GetComponent<Button>();
 
         return button;
-    }
-    
-    private void OptionsClick()
-    {
-        print("clicked options");
-        SetState("Options");
     }
 
 
@@ -84,10 +76,7 @@ public class UIManager : MonoBehaviour
                     obj.SetActive(false);
                 }
                 break; 
-            
-            case "Options":
-                //TODO:
-                break;
+
         }
     }
 

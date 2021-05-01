@@ -92,7 +92,7 @@ MonoBehaviour:
   policeCar: {fileID: 100010, guid: c242e8f877bfdcd41baf7688f8257e61, type: 3}
   policeCarsMax: 0
   policeSpawnSeconds: 7
-  policeSpawnPosOffset: {x: 12, y: 1, z: 20}
+  policeSpawnPosOffset: {x: 12, y: 1, z: 25}
   roadTile: {fileID: 8705768015760127159, guid: 0939b1afbcafaf4439a4e81d6b8ad464, type: 3}
   roadSpawnposOffset: {x: 0, y: 0, z: -55}
   tileSpawnSeconds: 0.95
@@ -100,6 +100,7 @@ MonoBehaviour:
   camTarget: {fileID: 0}
   vcam: {fileID: 0}
   timeToStart: 5
+  timerVCamTargetPos: {x: 0, y: 0, z: 0}
 --- !u!82 &2370969665595545837
 AudioSource:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.188
   m_Pitch: 1.45
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

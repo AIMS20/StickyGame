@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class RoadTileController : MonoBehaviour
 {
-    [SerializeField] public GameObject GameManager;
+    public GameManager gameManager;
     private GameObject tile;
     private float maxDistance;
 
@@ -15,7 +15,7 @@ public class RoadTileController : MonoBehaviour
     {
         tile = gameObject;
 ;
-        maxDistance = tile.GetComponent<BoxCollider>().size.z * global::GameManager.maxDistanceMod;
+        maxDistance = tile.GetComponent<BoxCollider>().size.z * gameManager.maxDistanceRoadMod;
         var rb = tile.GetComponent<Rigidbody>();
         rb.AddForce(new Vector3(0,0,global::GameManager.tileSpeed * tile.GetComponent<Rigidbody>().mass));
     }
@@ -28,7 +28,7 @@ public class RoadTileController : MonoBehaviour
 
     private void checkDistance()
     {
-        var currentDistance = Vector3.Distance(GameManager.transform.position, tile.transform.position);
+        var currentDistance = Vector3.Distance(gameManager.transform.position, tile.transform.position);
         // print(currentDistance);
         if (currentDistance > maxDistance)
         {
