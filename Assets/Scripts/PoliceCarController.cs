@@ -13,8 +13,10 @@ public class PoliceCarController : MonoBehaviour
     public GameObject player;
     public TruckController truckController;
     public List<Transform> tyres;
+    public GameManager gameManager;
     
 
+    [SerializeField] private int hitSwayAmount = 250;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] public float despawnDistance = 10f;
     [SerializeField] public float pushAttackDist = 2f;
@@ -34,7 +36,7 @@ public class PoliceCarController : MonoBehaviour
         PUSH, DEFEATPLAYER, HIT
     }
 
-    private Modes modeMode;
+    private Modes currentMode;
     
     // Start is called before the first frame update
     void Start()
@@ -48,10 +50,11 @@ public class PoliceCarController : MonoBehaviour
         coll = policeCar.GetComponent<BoxCollider>();
         
         policeCarMat = policeCar.transform.GetChild(0).transform.GetComponent<Renderer>();
+        policeCarMat.material.color = Color.white;
         poopBrown = new Color(123f/255f, 69f/255f, 27f/255f);
 
         //initial speed which increases with gametime
-        moveSpeed = GameManager.Instance.policeMoveSpeed; //TODO: refactor
+        moveSpeed = gameManager.policeMoveSpeed; //TODO: refactor
 
     }
 
@@ -64,10 +67,10 @@ public class PoliceCarController : MonoBehaviour
 
         
         //TODO: iterate through enums instead? readability would suck tho
-        switch (modeMode)
+        switch (currentMode)
         {
             //try to get in front of player
-            case Modes.PUSH: //TODO: add swaying from side to side
+            case Modes.PUSH: 
                 // print("PUSH MODE");
                 PushMode();
                 break;
@@ -81,7 +84,7 @@ public class PoliceCarController : MonoBehaviour
             //got in front of player
             case Modes.DEFEATPLAYER:
                 // print("DEFEAT MODE");
-                StartCoroutine(nameof(EndChase));
+                Invoke(nameof(EndChase), 1f);
                 break;
             
             //chase player until close enough to change into PUSH mode
@@ -94,12 +97,12 @@ public class PoliceCarController : MonoBehaviour
 
     }
 
-    public void DefaultMode()
+    private void DefaultMode()
     {
         currentGoal = chaseGoalPos;
         if (Vector3.Distance(policeCarPos, currentGoal) <= pushAttackDist)
         {
-            modeMode = Modes.PUSH;
+            currentMode = Modes.PUSH;
         }
     }
 
@@ -109,14 +112,8 @@ public class PoliceCarController : MonoBehaviour
         moveSpeed -= 0.5f;
 
         if (Vector3.Distance(policeCarPos, chaseGoalPos) > despawnDistance){
-            StartCoroutine(DestroyCar(policeCar));
+            Invoke(nameof(DestroyCarInvoke), 3f);
         }
-
-    }
-
-    private IEnumerator SwayToSides()
-    {
-        yield return new WaitForSeconds(0);
 
     }
 
@@ -127,25 +124,24 @@ public class PoliceCarController : MonoBehaviour
 
         if (Vector3.Distance(policeCarPos, currentGoal) < defeatAttackDist)
         {
-            modeMode = Modes.DEFEATPLAYER;
+            currentMode = Modes.DEFEATPLAYER;
         }
     }
 
-    private void UpdatePositions()
+    private void UpdatePositions() 
     {
         var step = moveSpeed * Time.deltaTime;
+        var collBounds = coll.bounds;
 
-        chaseGoalPos = player.transform.position;
+        chaseGoalPos = player.transform.position + new Vector3(0,collBounds.extents.y,0);
         policeCarPos = policeCar.transform.position;
-        endGoalPos = chaseGoalPos + new Vector3(0, 0, -coll.bounds.size.z * 1.5f);
+        endGoalPos = chaseGoalPos + new Vector3(0, 0, -collBounds.size.z * 1.5f);
         
         //move to current goal
         policeCar.transform.position = Vector3.MoveTowards(policeCarPos, currentGoal, step);
     }
     
-
-
-
+    
     private void OnCollisionEnter(Collision other){
         if (other.gameObject.CompareTag("Player") ){
             // attackMode = Attacks.HIT;
@@ -157,7 +153,7 @@ public class PoliceCarController : MonoBehaviour
             // poop.GetComponent<Rigidbody>().isKinematic = true;
             
             rb.AddExplosionForce(PoopController.poopExplForce, poop.position, 1f, 20f );
-            rb.AddForce(new Vector3(0, 0, PoopController.poopHitForce)); //TODO:  test
+            rb.AddForce(new Vector3(0, 0, PoopController.poopHitForce));
             
             //attach poop
             poop.position += policeCar.transform.position;
@@ -170,29 +166,23 @@ public class PoliceCarController : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezePositionY;
             
             //sway  to side
-            rb.AddTorque(transform.up * Random.Range(-350f, 350f), ForceMode.Impulse); 
-            modeMode = Modes.HIT;
+            rb.AddTorque(transform.up * Random.Range(-hitSwayAmount, hitSwayAmount), ForceMode.Impulse); 
+            currentMode = Modes.HIT;
         }
     }
-
-    IEnumerator DestroyCar(GameObject car)
+    
+    void DestroyCarInvoke()
     {
-        yield return new WaitForSeconds(3);
-        // print("DESTROYING" + car);
-        Destroy(car);
-        
+        Destroy(policeCar);
     }  
     
-    IEnumerator EndChase()
+    void EndChase()
     {
-        yield return new WaitForSeconds(3);
-        DestroyCar(player);
+        if (GameManager.gameOver) return;
+    
 
-        GameManager.gameOver = true;
-        DestroyCar(policeCar);
-
+        GameManager.EndRace();
+        // Destroy(policeCar);
     }
-    
-    
-    
+
 }

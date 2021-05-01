@@ -92,14 +92,13 @@ MonoBehaviour:
   policeCar: {fileID: 100010, guid: c242e8f877bfdcd41baf7688f8257e61, type: 3}
   policeCarsMax: 0
   policeSpawnSeconds: 7
-  policeSpawnposOffset: {x: 12, y: 1, z: 20}
+  policeSpawnPosOffset: {x: 12, y: 1, z: 20}
   roadTile: {fileID: 8705768015760127159, guid: 0939b1afbcafaf4439a4e81d6b8ad464, type: 3}
-  roadTileCollider: {fileID: 0}
-  curbR: {fileID: 0}
-  curbL: {fileID: 0}
-  camTarget: {fileID: 0}
   roadSpawnposOffset: {x: 0, y: 0, z: -55}
   tileSpawnSeconds: 0.95
+  maxDistanceMod: 6
+  camTarget: {fileID: 0}
+  vcam: {fileID: 0}
   timeToStart: 5
 --- !u!82 &2370969665595545837
 AudioSource:

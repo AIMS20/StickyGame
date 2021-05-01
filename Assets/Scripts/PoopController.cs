@@ -5,8 +5,8 @@ using UnityEngine;
 public class PoopController : MonoBehaviour
 {
     private GameObject poop;
-    private Rigidbody rb;
     [SerializeField] public static float poopHitForce = 15f;
+    [SerializeField] public static float poopExplForce = 15f;
     
     [SerializeField] private float poopForce = 5f;
     
@@ -18,12 +18,17 @@ public class PoopController : MonoBehaviour
         //initial push
         poop.GetComponent<Rigidbody>().AddForce(new Vector3(0,0,poopForce));
 
-        rb = poop.GetComponent<Rigidbody>();
+        
+        Invoke(nameof(DestroyPoop), 3f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+
+    void DestroyPoop(){
+        Destroy(poop);
     }
 }

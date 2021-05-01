@@ -462,6 +462,8 @@ MonoBehaviour:
   - {fileID: 400004}
   - {fileID: 400002}
   - {fileID: 400000}
+  gameManager: {fileID: 5969801314486088461, guid: b2471fba733ff3040a75cce1ebdf90be, type: 3}
+  hitSwayAmount: 250
   moveSpeed: 0.1
   despawnDistance: 10
   pushAttackDist: 2
