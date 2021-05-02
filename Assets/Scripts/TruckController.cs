@@ -13,7 +13,6 @@ public class TruckController : MonoBehaviour
     [SerializeField] float maxTurn;
     
     [SerializeField] public GameObject poopSpawnObj;
-    [SerializeField] public GameManager gameManager;
     [SerializeField] public Vector3 poopSpawn;
     [SerializeField] private float poopCooldown;
     
@@ -63,12 +62,7 @@ public class TruckController : MonoBehaviour
         currentCooldown -= Time.deltaTime;
 
         PoopLogic();
-
-        //rotation max //TODO
-        // transform.Rotate(0, 0, -truck.transform.localRotation.y, Space.Self);
-        // var transformEulerAngles = truck.transform.eulerAngles;
-        // transformEulerAngles.y = Mathf.Clamp(transform.eulerAngles.y, -maxTurn, maxTurn);
-        // truck.transform.Rotate(transformEulerAngles);
+        
     }
 
     private void PoopLogic()
@@ -115,16 +109,7 @@ public class TruckController : MonoBehaviour
         //get horizontal input
         axisInput = Input.GetAxis("Horizontal");
         // print(axisInput);
-
-        // if (axisInput < -maxTurn){
-        //     axisInput = -maxTurn;
-        // }
-        //
-        // if (axisInput > maxTurn){
-        //     axisInput = maxTurn;
-        // }
-
-        // var localRot = truck.transform.localRotation.y;
+        
         
         //move on X
         rb.AddForce(new Vector3(-axisInput * moveStrength, 0, 0));
@@ -135,12 +120,12 @@ public class TruckController : MonoBehaviour
         
         // print(truck.transform.localEulerAngles);
         if (truck.transform.localEulerAngles.y > maxTurn){
-            // truck.transform.LookAt(gameManager.transform); //TODO: slow lookat oder rotate back? -localrot?
+            // truck.transform.LookAt(gameManager.transform); //TODO: fix clamping of rotation
         }
         // print(axisInput);
         
         //spawn poop on A
-        if (canPoop &&  Input.GetButtonDown("Poop")){
+        if (canPoop && Input.GetButtonDown("Poop")){
             // print("POOPING");
                 
             Instantiate(poop, poopSpawn, Quaternion.AngleAxis(-90, new Vector3(1,0,0)));

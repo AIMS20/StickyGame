@@ -91,12 +91,13 @@ MonoBehaviour:
   player: {fileID: 6756655520058813097, guid: 95c87f0013a8edd45bcab59c04beaa71, type: 3}
   policeCar: {fileID: 100010, guid: c242e8f877bfdcd41baf7688f8257e61, type: 3}
   policeCarsMax: 0
-  policeSpawnSeconds: 7
-  policeSpawnPosOffset: {x: 12, y: 1, z: 25}
+  policeSpawnSeconds: 5
+  policeMoveSpeed: 0.25
+  policeIncreaseSpeed: 0.009
   roadTile: {fileID: 8705768015760127159, guid: 0939b1afbcafaf4439a4e81d6b8ad464, type: 3}
   roadSpawnposOffset: {x: 0, y: 0, z: -55}
   tileSpawnSeconds: 0.95
-  maxDistanceMod: 6
+  maxDistanceRoadMod: 6
   camTarget: {fileID: 0}
   vcam: {fileID: 0}
   timeToStart: 5

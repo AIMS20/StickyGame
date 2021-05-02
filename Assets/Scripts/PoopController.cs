@@ -22,10 +22,6 @@ public class PoopController : MonoBehaviour
         Invoke(nameof(DestroyPoop), 3f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
 
     void DestroyPoop(){

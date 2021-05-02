@@ -6,6 +6,7 @@ using System.Timers;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,10 +20,11 @@ public class GameManager : MonoBehaviour
     //police
     public GameObject policeCar;
     private List<GameObject> policeCars;
+    private Vector3 policeSpawnPosOffset;
     [SerializeField] public int policeCarsMax = 5;
     [SerializeField] public float policeSpawnSeconds = 10f;
-    [SerializeField] Vector3 policeSpawnPosOffset;
-    public float policeMoveSpeed { get; private set; } //TODO: find out how to serialize
+    [SerializeField] public float policeMoveSpeed;
+    [SerializeField] private float policeIncreaseSpeed;
     
     //road
     public GameObject roadTile;
@@ -76,10 +78,11 @@ public class GameManager : MonoBehaviour
         playerRb = player.GetComponent<Rigidbody>();
         playerRb.useGravity = false;
         
-        // rb.constraints = RigidbodyConstraints.FreezeAll; //TODO: fix with correct rotation
+        // rb.constraints = RigidbodyConstraints.FreezeAll; //TODO: add back in with correct rotation
 
         //spawn police cars
         policeCars = new List<GameObject>();
+        policeSpawnPosOffset.y = 1; //TODO: magic numbas
         policeSpawnPosOffset = playerSpawnpos + policeSpawnPosOffset;
 
         InvokeRepeating(nameof(SpawnPoliceCars), 0f, policeSpawnSeconds);
@@ -111,18 +114,13 @@ public class GameManager : MonoBehaviour
     
     private void SpawnPoliceCars()
     {
-        policeSpawnPosOffset.x -= 4; //TODO: policecar width or random instead
         
         // print("POLICE SPAWN AT: "+policeSpawnpos.x);
         
         //reset spawn
-        if (policeSpawnPosOffset.x <= -12) //TODO: fix magic numbas
-        {
-            policeSpawnPosOffset.x = 12;
-            policeSpawnPosOffset.z += 5;
-        }
+        policeSpawnPosOffset.x = Random.Range(-13, 13); //TODO: += policecar width or random instead
+        policeSpawnPosOffset.z = Random.Range(20, 40); //TODO: magic numbas
 
-        
         if ((policeCars.Count < policeCarsMax || policeCarsMax == 0) && !gameOver){
             
             policeCars.Add(Instantiate(policeCar, policeSpawnPosOffset,
@@ -148,24 +146,25 @@ public class GameManager : MonoBehaviour
 
     private void UpdatePoliceSpeed()
     {
-        policeMoveSpeed += 0.00025f;
-        // print("curr police speed: "+policeMoveSpeed);
+        policeMoveSpeed += policeIncreaseSpeed;
+        // print("curr police speed at spawntime: "+policeMoveSpeed);
 
     }
 
     private void UpdateTimer()
     {
-        if (!gameStarted)
-        {
-            timer = (int) timeToStart - Time.deltaTime;
-        }
-        else
+        if (gameStarted)
         {
             currentTime += Time.deltaTime;
             timer = (int) currentTime;
+            timerText.Text = $"{timer.ToString(CultureInfo.CurrentCulture)}";
         }
-
-        timerText.Text = $"{timer.ToString(CultureInfo.CurrentCulture)}";
+        else
+        {
+            var timerBegin = "--";
+            timerText.Text = $"{timerBegin.ToString(CultureInfo.CurrentCulture)}";
+        }
+        
         timerText.GenerateText();
     }
 

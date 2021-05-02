@@ -21,6 +21,7 @@ public class PoliceCarController : MonoBehaviour
     [SerializeField] public float despawnDistance = 10f;
     [SerializeField] public float pushAttackDist = 2f;
     [SerializeField] public float defeatAttackDist = 0.5f;
+    [SerializeField] public float speedIncreasePush = 0.01f;
 
     private GameObject policeCar;
     private Color poopBrown;
@@ -32,7 +33,7 @@ public class PoliceCarController : MonoBehaviour
     private Vector3 endGoalPos;
     private Vector3 currentGoal;
 
-    public enum Modes{
+    private enum Modes{
         PUSH, DEFEATPLAYER, HIT
     }
 
@@ -120,7 +121,7 @@ public class PoliceCarController : MonoBehaviour
     private void PushMode()
     {
         currentGoal = endGoalPos;
-        moveSpeed += 0.001f;
+        moveSpeed += speedIncreasePush;
 
         if (Vector3.Distance(policeCarPos, currentGoal) < defeatAttackDist)
         {
@@ -156,7 +157,12 @@ public class PoliceCarController : MonoBehaviour
             rb.AddForce(new Vector3(0, 0, PoopController.poopHitForce));
             
             //attach poop
-            poop.position += policeCar.transform.position;
+            poop.GetComponent<Rigidbody>().isKinematic = true;
+            var poopColl = poop.GetComponent<MeshCollider>();
+            poopColl.enabled = false;
+            // var poopTransform = poop.transform;
+            // poopTransform.position += new Vector3(0, 0, poopColl.bounds.size.z*3f);
+            poop.transform.SetParent(this.transform);
             
             //change mat
             policeCarMat.material.color = poopBrown;

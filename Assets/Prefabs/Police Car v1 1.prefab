@@ -468,6 +468,7 @@ MonoBehaviour:
   despawnDistance: 10
   pushAttackDist: 2
   defeatAttackDist: 0.15
+  speedIncreasePush: 0.01
 --- !u!65 &8968037073534809432
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -479,8 +480,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.748817, y: 6.5359287, z: 15.693974}
-  m_Center: {x: 0.00001335144, y: 0.4566909, z: 0.17683029}
+  m_Size: {x: 6.658246, y: 6.5359287, z: 14.56275}
+  m_Center: {x: 0.00001335144, y: 0.4566908, z: -0.38878155}
 --- !u!54 &7621534475180281382
 Rigidbody:
   m_ObjectHideFlags: 0
