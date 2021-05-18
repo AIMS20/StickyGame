@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float policeIncreaseSpeed;
     
     //road
-    public GameObject roadTile;
+    // public GameObject roadTile;
     [SerializeField] Vector3 roadSpawnposOffset;
     [SerializeField] public static float tileSpeed = 500f;
     [SerializeField] public float tileSpawnSeconds = 0.95f;
@@ -48,13 +48,25 @@ public class GameManager : MonoBehaviour
     //game
     private static bool gameStarted;
     [NonSerialized] public static bool gameOver;
+    
+    //road pooling
+    private static GameManager SharedInstance;
+    [SerializeField] private List<GameObject> pooledObjects;
+    [SerializeField] private GameObject objectToPool;
+    [SerializeField] private int amountToPool;
+
 
     
     // Start is called before the first frame update
     void Awake()
     {
         InstanceCheck();
+        
+        SharedInstance = this;
 
+        pooledObjects = new List<GameObject>();
+        StartPooling();
+        
         policeMoveSpeed = 0.25f;
         currentTime = 0f;
         gameStarted = false;
@@ -97,19 +109,44 @@ public class GameManager : MonoBehaviour
     private void InstanceCheck()
     {
         if (instance != null && instance != this){
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {
             instance = this;
         }
     }
+    
+    private void StartPooling()
+    {
+        for (var i = 0; i < amountToPool; i++)
+        {
+            var tmp = Instantiate(objectToPool);
+            tmp.SetActive(false);
+            pooledObjects.Add(tmp);
+        }
+    }
 
+    public GameObject GetPooledObject(){
+        for (var i = 0; i < amountToPool; i++){
+            if (!pooledObjects[i].activeInHierarchy){
+                return pooledObjects[i];
+            }
+        }
+        return null;
+    }
+    
     private void SpawnRoads()
     {
         // print("ROAD SPAWN POS: "+roadSpawnpos);
-        Instantiate(roadTile, roadSpawnposOffset, Quaternion.identity);
+        // Instantiate(roadTile, roadSpawnposOffset, Quaternion.identity);
         
+        GameObject roadTile = SharedInstance.GetPooledObject();
+        if (roadTile != null){
+            roadTile.transform.position = roadSpawnposOffset;
+            roadTile.transform.rotation = Quaternion.identity;
+            roadTile.SetActive(true);
+        }
     }
     
     private void SpawnPoliceCars()
