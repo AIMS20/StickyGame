@@ -7,6 +7,8 @@ TagManager:
   - Poop
   - GamestateObjects
   - MenustateObjects
+  - MenuCamera
+  - Button
   layers:
   - Default
   - TransparentFX
