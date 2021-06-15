@@ -11,13 +11,17 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour, ISelectHandler
 {
     private GameObject uiManager;
+    public Slider volumeSlider;
+    public GameObject gameManager;
     private Button playButton;
     private Transform canvas;
-    private Camera mainCam;
-    private Camera menuCam;
     public GameObject poopSelector;
     public float rotateSpeed = 25f;
 
+    [SerializeField] private EventSystem eventSystem;
+    private Material fontUnselectedMat;
+    private Material fontSelectedMat;
+    
     public Vector3 poopOffset;
     // private Button[] menuButtons;
     private GameObject currentSelection;
@@ -31,11 +35,10 @@ public class UIManager : MonoBehaviour, ISelectHandler
     private void Awake()
     {
         uiManager = gameObject;
-        mainCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        menuCam = GameObject.FindWithTag("MenuCamera").GetComponent<Camera>();
+
+
         
         canvas = uiManager.transform.Find("MainMenu");
-        
         
         playButton = GetButton("Play");
         // playButton.onClick.AddListener(PlayClick); //TODO:  integrate into GetButton
@@ -51,8 +54,6 @@ public class UIManager : MonoBehaviour, ISelectHandler
         
         //select first button
         EventSystem.current.SetSelectedGameObject(playButton.gameObject);
-        //spawn selection poop
-        Instantiate(poopSelector, Vector3.zero, Quaternion.identity);
     }
 
     private Button GetButton(string name)
@@ -64,7 +65,9 @@ public class UIManager : MonoBehaviour, ISelectHandler
 
     public void ChangeVolume()
     {
-        print("changing volume!");
+        print("changing volume to "+volumeSlider.value+"!");
+        AudioListener.volume = volumeSlider.value;
+
     }
     
     //int parameter to bypass OnClick() restriction of passing enum and still optimize speed
@@ -75,8 +78,6 @@ public class UIManager : MonoBehaviour, ISelectHandler
             case 0:
                 currentState = States.MENU;
                 Time.timeScale = 0;
-                mainCam.enabled = false;
-                menuCam.enabled = true;
                 break;
             
             case 1:
@@ -87,8 +88,6 @@ public class UIManager : MonoBehaviour, ISelectHandler
             case 2:
                 currentState = States.GAME;
                 Time.timeScale = 1;
-                menuCam.enabled = false;
-                mainCam.enabled = true;
                 break; 
             
             case 3:
@@ -103,10 +102,12 @@ public class UIManager : MonoBehaviour, ISelectHandler
     void Update()
     {
         currentSelection = EventSystem.current.currentSelectedGameObject;
-        print(currentSelection.name);
         
         //TODO: disable mouse or always enable one selection
         if (currentSelection != null){
+            // print(currentSelection.name);
+            
+            // print(currentSelection.GetComponent<Graphic>().canvasRenderer.GetColor());
             UpdatePoopSelector();
             
             currentSelection.transform.Rotate(new Vector3(1, 0, 1), Mathf.Sin(Time.unscaledTime)*rotateSpeed);
@@ -121,8 +122,8 @@ public class UIManager : MonoBehaviour, ISelectHandler
         poopSelector.transform.position = Vector3.MoveTowards(poopSelector.transform.position, poopOffset, 100f);
     }
 
-    public void OnSelect(BaseEventData eventData)
-    {
-        throw new NotImplementedException();
+    public void OnSelect(BaseEventData eventData){ //TODO: on select -> red, on deselect -> white
+        print("change selection");
+        currentSelection.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial = fontSelectedMat;
     }
 }
