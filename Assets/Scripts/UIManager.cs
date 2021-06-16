@@ -126,8 +126,8 @@ public class UIManager : MonoBehaviour, ISelectHandler
     private void UpdatePoopSelector()
     {
 
-        poopOffset.y = currentSelection.transform.position.y-25f;
-        poopSelector.transform.Rotate(new Vector3(0, 0, 1), rotateSpeed);
+        poopOffset.y = currentSelection.transform.position.y-35f;
+        poopSelector.transform.Rotate(new Vector3(0, 1, 0), rotateSpeed*250f, Space.World);
         poopSelector.transform.position = Vector3.MoveTowards(poopSelector.transform.position, poopOffset, 100f);
     }
 
