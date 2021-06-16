@@ -19,8 +19,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
     public float rotateSpeed = 25f;
 
     [SerializeField] private EventSystem eventSystem;
-    private Material fontUnselectedMat;
-    private Material fontSelectedMat;
+
     
     public Vector3 poopOffset;
     // private Button[] menuButtons;
@@ -101,7 +100,6 @@ public class UIManager : MonoBehaviour, ISelectHandler
 
     void Update()
     {
-        currentSelection = EventSystem.current.currentSelectedGameObject;
         
         //TODO: disable mouse or always enable one selection
         if (currentSelection != null){
@@ -122,8 +120,16 @@ public class UIManager : MonoBehaviour, ISelectHandler
         poopSelector.transform.position = Vector3.MoveTowards(poopSelector.transform.position, poopOffset, 100f);
     }
 
-    public void OnSelect(BaseEventData eventData){ //TODO: on select -> red, on deselect -> white
-        print("change selection");
-        currentSelection.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial = fontSelectedMat;
+    public void OnSelect(BaseEventData eventData){
+            currentSelection = eventData.selectedObject;
+            currentSelection.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial.color = Color.red;
+
+            print("change selection to " + eventData.selectedObject);
+    }
+    public void OnDeselect(BaseEventData eventData){ 
+            eventData.selectedObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial.color = Color.white;
+  
+        
+            print("change selection to " + eventData.selectedObject);
     }
 }
