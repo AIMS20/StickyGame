@@ -2,6 +2,7 @@
 //email: info@pepwuper.com
 //version 1.0
 
+using System;
 using UnityEditor;
 using UnityEngine;
 using System.Collections;
@@ -52,7 +53,12 @@ public class SimpleHelvetica : MonoBehaviour {
 		
 #if !UNITY_3_4 && !UNITY_3_5
 		//disable _Alphabets and all children under it to remove them from being seen.
-		transform.Find("_Alphabets").gameObject.SetActive(false);
+		try{
+			transform.Find("_Alphabets").gameObject.SetActive(false);
+		}
+		catch (Exception e){
+			Console.WriteLine(e);
+		}
 		
 #else
 		//disable _Alphabets and all children under it to remove them from being seen.
