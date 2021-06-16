@@ -11,19 +11,20 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour, ISelectHandler
 {
     private GameObject uiManager;
+    private GameObject currentSelection;
     public Slider volumeSlider;
-    public GameObject gameManager;
-    private Button playButton;
-    private Transform canvas;
+    public Slider difficultySlider;
+    public GameManager gameManager;
     public GameObject poopSelector;
+    public Vector3 poopOffset;
+    
     public float rotateSpeed = 25f;
 
     [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private Material deselectedMat;
+    [SerializeField] private Material selectedMat;
 
     
-    public Vector3 poopOffset;
-    // private Button[] menuButtons;
-    private GameObject currentSelection;
     
     public enum States{
         MENU, OPTIONS, GAME, QUIT
@@ -34,17 +35,6 @@ public class UIManager : MonoBehaviour, ISelectHandler
     private void Awake()
     {
         uiManager = gameObject;
-
-
-        
-        canvas = uiManager.transform.Find("MainMenu");
-        
-        playButton = GetButton("Play");
-        // playButton.onClick.AddListener(PlayClick); //TODO:  integrate into GetButton
-
-        var quitButton = GetButton("Quit");
-        // quitButton.onClick.AddListener(QuitClick); //TODO:  integrate into GetButton
-        
     }
 
     private void Start()
@@ -52,21 +42,36 @@ public class UIManager : MonoBehaviour, ISelectHandler
         SetState(0);
         
         //select first button
-        EventSystem.current.SetSelectedGameObject(playButton.gameObject);
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("Play"));
     }
 
-    private Button GetButton(string name)
-    {
-        var button = canvas.Find(name).GetComponent<Button>();
-
-        return button;
-    }
 
     public void ChangeVolume()
     {
         print("changing volume to "+volumeSlider.value+"!");
         AudioListener.volume = volumeSlider.value;
+        UpdateSliderCube(volumeSlider);
+    }
+    public void ChangeDifficulty()
+    {
+        print("changing difficulty to "+difficultySlider.value+"!");
+        gameManager.policeMoveSpeed = difficultySlider.value;
+        UpdateSliderCube(difficultySlider);
+    }
 
+    private void UpdateSliderCube(Slider slider)
+    {
+        var sliderCubeScale = currentSelection.transform.GetChild(1).transform.localScale;
+        currentSelection.transform.GetChild(1).transform.localScale = new Vector3(
+            sliderCubeScale.x,
+            sliderCubeScale.y,
+            Remap(slider.value, slider.minValue, slider.maxValue, 0.25f, 60f));
+    }
+
+    private float Remap(float input, float oldLow, float oldHigh, float newLow, float newHigh)
+    {
+        float t = Mathf.InverseLerp(oldLow, oldHigh, input);
+        return Mathf.Lerp(newLow, newHigh, t);
     }
     
     //int parameter to bypass OnClick() restriction of passing enum and still optimize speed
@@ -102,14 +107,20 @@ public class UIManager : MonoBehaviour, ISelectHandler
     {
         
         //TODO: disable mouse or always enable one selection
-        if (currentSelection != null){
+        if (currentSelection != null)
+        {
             // print(currentSelection.name);
             
             // print(currentSelection.GetComponent<Graphic>().canvasRenderer.GetColor());
             UpdatePoopSelector();
-            
-            currentSelection.transform.Rotate(new Vector3(1, 0, 1), Mathf.Sin(Time.unscaledTime)*rotateSpeed);
+
+            UpdateSelectionAnim();
         }
+    }
+
+    private void UpdateSelectionAnim()
+    {
+        currentSelection.transform.Rotate(new Vector3(1, 0, 1), Mathf.Sin(Time.unscaledTime) * rotateSpeed);
     }
 
     private void UpdatePoopSelector()
@@ -121,15 +132,22 @@ public class UIManager : MonoBehaviour, ISelectHandler
     }
 
     public void OnSelect(BaseEventData eventData){
-            currentSelection = eventData.selectedObject;
-            currentSelection.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial.color = Color.red;
+        currentSelection = eventData.selectedObject;
+        
+        //change color to red on select
+        var parent = currentSelection.transform.GetChild(0).GetChild(0);
+        foreach (Transform child in parent){
+            child.GetComponent<Renderer>().material = selectedMat;
+        }
 
-            print("change selection to " + eventData.selectedObject);
+        print("change selection to " + eventData.selectedObject);
     }
     public void OnDeselect(BaseEventData eventData){ 
-            eventData.selectedObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial.color = Color.white;
-  
+        var parent = currentSelection.transform.GetChild(0).GetChild(0);
+        foreach (Transform child in parent){
+            child.GetComponent<Renderer>().material = deselectedMat;
+        }
         
-            print("change selection to " + eventData.selectedObject);
+        print("DEselection from " + eventData.selectedObject);
     }
 }
