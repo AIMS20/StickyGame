@@ -8313,13 +8313,12 @@ MonoBehaviour:
   policeCar: {fileID: 100010, guid: c242e8f877bfdcd41baf7688f8257e61, type: 3}
   policeCarsMax: 0
   policeSpawnSeconds: 5
-  policeMoveSpeed: 0.25
+  policeStartSpeed: 0.05
   policeIncreaseSpeed: 0.009
   roadSpawnposOffset: {x: 0, y: 0, z: -55}
   tileSpawnSeconds: 0.95
   maxDistanceRoadMod: 6
   camTarget: {fileID: 0}
-  vcam: {fileID: 0}
   timeToStart: 5
   timerVCamTargetPos: {x: 0, y: 0, z: 0}
   pooledObjects: []

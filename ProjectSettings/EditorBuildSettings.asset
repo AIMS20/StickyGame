@@ -9,7 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 3db1837cc97a95e4c98610966fac2b0b
   - enabled: 1
-    path: Assets/Scenes/Sticky1.unity
+    path: Assets/Scenes/Menu.unity
+    guid: 6214588996a0d0e44aca69a94be6b290
+  - enabled: 1
+    path: Assets/Scenes/Gameplay.unity
     guid: 4d8585b1fdb61c541897e9192abc08a1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 39f941e9cf3b7284e8e1b5cdcfea9a32, type: 2}

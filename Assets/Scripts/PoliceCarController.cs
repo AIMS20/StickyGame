@@ -21,7 +21,7 @@ public class PoliceCarController : MonoBehaviour
     [SerializeField] public float despawnDistance = 10f;
     [SerializeField] public float pushAttackDist = 2f;
     [SerializeField] public float defeatAttackDist = 0.5f;
-    [SerializeField] public float speedIncreasePush = 0.01f;
+    [SerializeField] public float speedIncreasePush = 0.005f;
 
     private GameObject policeCar;
     private Color poopBrown;
@@ -55,7 +55,8 @@ public class PoliceCarController : MonoBehaviour
         poopBrown = new Color(123f/255f, 69f/255f, 27f/255f);
 
         //initial speed which increases with gametime
-        moveSpeed = gameManager.policeMoveSpeed; //TODO: refactor
+        moveSpeed = GameManager.instance.policeStartSpeed; //TODO: refactor
+        print(policeCar.name + " - CURR SPEED: "+ moveSpeed);
 
     }
 
@@ -65,6 +66,7 @@ public class PoliceCarController : MonoBehaviour
         truckController.SpinTires(tyres);
         
         UpdatePositions();
+        
 
         
         //TODO: iterate through enums instead? readability would suck tho

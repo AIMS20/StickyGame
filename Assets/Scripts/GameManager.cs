@@ -10,7 +10,8 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    public static GameManager instance;
+
     // public static GameManager Instance => instance; //get return
 
     //player
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
     private Vector3 policeSpawnPosOffset;
     [SerializeField] public int policeCarsMax = 5;
     [SerializeField] public float policeSpawnSeconds = 10f;
-    [SerializeField] public float policeMoveSpeed;
+    [SerializeField] public float policeStartSpeed;
     [SerializeField] private float policeIncreaseSpeed;
     
     //road
@@ -35,7 +36,6 @@ public class GameManager : MonoBehaviour
     
     //cam
     public GameObject camTarget;
-    public CinemachineVirtualCamera vcam;
     
     //time
     [SerializeField] float timeToStart;
@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     [NonSerialized] public static bool gameOver;
     
     //road pooling
-    private static GameManager SharedInstance;
     [SerializeField] private List<GameObject> pooledObjects;
     [SerializeField] private GameObject objectToPool;
     [SerializeField] private int amountToPool;
@@ -62,16 +61,20 @@ public class GameManager : MonoBehaviour
     {
         InstanceCheck();
         
-        SharedInstance = this;
-
         pooledObjects = new List<GameObject>();
         StartPooling();
         
-        policeMoveSpeed = 0.25f;
+        policeStartSpeed = PersistentSettings.policeStartSpeed;
+        policeIncreaseSpeed = PersistentSettings.policeIncreaseSpeed;
+        policeSpawnSeconds = PersistentSettings.policeSpawnSeconds;
+            
         currentTime = 0f;
         gameStarted = false;
         gameOver = false;
 
+        //cam
+        camTarget = GameObject.Find("CamTarget");
+        
         //initialize timer
         timerText = gameObject.GetComponentInChildren<SimpleHelvetica>();
         timerText.Text = "0";
@@ -115,6 +118,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+        
+
     }
     
     private void StartPooling()
@@ -141,7 +146,7 @@ public class GameManager : MonoBehaviour
         // print("ROAD SPAWN POS: "+roadSpawnpos);
         // Instantiate(roadTile, roadSpawnposOffset, Quaternion.identity);
         
-        GameObject roadTile = SharedInstance.GetPooledObject();
+        GameObject roadTile = instance.GetPooledObject();
         if (roadTile != null){
             roadTile.transform.position = roadSpawnposOffset;
             roadTile.transform.rotation = Quaternion.identity;
@@ -183,7 +188,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdatePoliceSpeed()
     {
-        policeMoveSpeed += policeIncreaseSpeed;
+        policeStartSpeed += policeIncreaseSpeed;
         // print("curr police speed at spawntime: "+policeMoveSpeed);
 
     }

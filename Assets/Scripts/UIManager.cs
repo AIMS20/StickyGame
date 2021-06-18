@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.HID;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour, ISelectHandler
@@ -14,12 +15,12 @@ public class UIManager : MonoBehaviour, ISelectHandler
     private GameObject currentSelection;
     public Slider volumeSlider;
     public Slider difficultySlider;
-    public GameManager gameManager;
     public GameObject poopSelector;
     public Vector3 poopOffset;
     
     public float rotateSpeed = 25f;
 
+    [SerializeField] private PersistentSettings persistentSettings;
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private Material deselectedMat;
     [SerializeField] private Material selectedMat;
@@ -40,6 +41,10 @@ public class UIManager : MonoBehaviour, ISelectHandler
     private void Start()
     {
         SetState(0);
+        DontDestroyOnLoad(persistentSettings);
+        
+        //set unedited diff
+        PersistentSettings.UpdateDiff(1);
         
         //select first button
         EventSystem.current.SetSelectedGameObject(GameObject.Find("Play"));
@@ -55,7 +60,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
     public void ChangeDifficulty()
     {
         print("changing difficulty to "+difficultySlider.value+"!");
-        gameManager.policeMoveSpeed = difficultySlider.value;
+        PersistentSettings.UpdateDiff((int)difficultySlider.value);
         UpdateSliderCube(difficultySlider);
     }
 
@@ -86,12 +91,13 @@ public class UIManager : MonoBehaviour, ISelectHandler
             
             case 1:
                 currentState = States.OPTIONS;
-                Time.timeScale = 0;
                 break;       
             
             case 2:
                 currentState = States.GAME;
                 Time.timeScale = 1;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+
                 break; 
             
             case 3:
@@ -99,7 +105,6 @@ public class UIManager : MonoBehaviour, ISelectHandler
                 print("clicked quit");
                 Application.Quit();
                 break;
-                
         }
     }
 
@@ -140,7 +145,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
             child.GetComponent<Renderer>().material = selectedMat;
         }
 
-        print("change selection to " + eventData.selectedObject);
+        // print("change selection to " + eventData.selectedObject);
     }
     public void OnDeselect(BaseEventData eventData){ 
         var parent = currentSelection.transform.GetChild(0).GetChild(0);
@@ -148,6 +153,6 @@ public class UIManager : MonoBehaviour, ISelectHandler
             child.GetComponent<Renderer>().material = deselectedMat;
         }
         
-        print("DEselection from " + eventData.selectedObject);
+        // print("DEselection from " + eventData.selectedObject);
     }
 }

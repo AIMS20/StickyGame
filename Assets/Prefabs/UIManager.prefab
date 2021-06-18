@@ -1571,10 +1571,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 622401859963565752}
   difficultySlider: {fileID: 5739590891320094304}
-  gameManager: {fileID: 0}
   poopSelector: {fileID: 910944023761493247}
   poopOffset: {x: 90, y: 0, z: 150}
-  rotateSpeed: 0.1
+  rotateSpeed: 0.125
+  persistentSettings: {fileID: 0}
   eventSystem: {fileID: 0}
   deselectedMat: {fileID: 2100000, guid: 40da058339d800b4bb0bc99171599bed, type: 2}
   selectedMat: {fileID: 2100000, guid: b6ae54700e543ef4fa1c041429101d3b, type: 2}
@@ -3288,8 +3288,8 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0.5
+  m_WholeNumbers: 1
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
