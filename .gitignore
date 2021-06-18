@@ -40,10 +40,4 @@ Icon?
 ehthumbs.db
 Thumbs.db
 *.log
-SpacePace/Library/
-SpacePace/Library/ArtifactDB
-SpacePace/Library/InspectorExpandedItems.asset
-SpacePace/Library/SceneVisibilityState.asset
-SpacePace/Library/SourceAssetDB
-SpacePace/.idea/.idea.SpacePace/.idea/riderModule.iml
-SpacePace/.idea/.idea.SpacePace/.idea/indexLayout.xml
+.idea/*
