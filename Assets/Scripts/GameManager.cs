@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour
     //road
     // public GameObject roadTile;
     [SerializeField] Vector3 roadSpawnposOffset;
-    [SerializeField] public static float tileSpeed = 500f;
+    [SerializeField] public float tileSpeed = 1f;
     [SerializeField] public float tileSpawnSeconds = 0.95f;
-    [SerializeField] public float maxDistanceRoadMod = 6f;
+    [SerializeField] public float maxDistanceRoadMod = 60f;
     
     //cam
     public GameObject camTarget;
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameObject GetPooledObject(){
+    private GameObject GetPooledObject(){
         for (var i = 0; i < amountToPool; i++){
             if (!pooledObjects[i].activeInHierarchy){
                 return pooledObjects[i];

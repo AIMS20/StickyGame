@@ -16,7 +16,7 @@ public class PoopController : MonoBehaviour
         poop = gameObject;
         
         //initial push
-        poop.GetComponent<Rigidbody>().AddForce(new Vector3(0,0,poopForce));
+        poop.GetComponent<Rigidbody>().AddForce(new Vector3(0,0,poopForce), ForceMode.VelocityChange);
 
         
         Invoke(nameof(DestroyPoop), 3f);

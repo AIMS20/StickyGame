@@ -8316,14 +8316,15 @@ MonoBehaviour:
   policeStartSpeed: 0.05
   policeIncreaseSpeed: 0.009
   roadSpawnposOffset: {x: 0, y: 0, z: -55}
-  tileSpawnSeconds: 0.95
-  maxDistanceRoadMod: 6
+  tileSpeed: 12
+  tileSpawnSeconds: 3.25
+  maxDistanceRoadMod: 65
   camTarget: {fileID: 0}
   timeToStart: 5
   timerVCamTargetPos: {x: 0, y: 0, z: 0}
   pooledObjects: []
   objectToPool: {fileID: 8705768015760127159, guid: 0939b1afbcafaf4439a4e81d6b8ad464, type: 3}
-  amountToPool: 20
+  amountToPool: 6
 --- !u!82 &2370969665595545837
 AudioSource:
   m_ObjectHideFlags: 0

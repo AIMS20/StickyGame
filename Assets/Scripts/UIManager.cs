@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
 {
     private GameObject uiManager;
     private GameObject currentSelection;
+    private RectTransform currButtonTransform;
     public Slider volumeSlider;
     public Slider difficultySlider;
     public GameObject poopSelector;
@@ -130,17 +131,19 @@ public class UIManager : MonoBehaviour, ISelectHandler
 
     private void UpdatePoopSelector()
     {
-
-        poopOffset.y = currentSelection.transform.position.y-35f;
+        var poopTarget = currentSelection.transform.Find("PoopTarget").position;
+        poopOffset = new Vector3(poopTarget.x, poopTarget.y-35f, poopTarget.z);
+        // var newPoopPos = new Vector3(currButtonTransform.rect., currentSelection.transform.position.y + poopOffset.y, currentSelection.transform.position.z);
         poopSelector.transform.Rotate(new Vector3(0, 1, 0), rotateSpeed*250f, Space.World);
-        poopSelector.transform.position = Vector3.MoveTowards(poopSelector.transform.position, poopOffset, 100f);
+        poopSelector.transform.position = Vector3.MoveTowards(poopSelector.transform.position, poopOffset, 125f);
     }
 
     public void OnSelect(BaseEventData eventData){
         currentSelection = eventData.selectedObject;
-        
+        currButtonTransform = currentSelection.GetComponent<RectTransform>();
+
         //change color to red on select
-        var parent = currentSelection.transform.GetChild(0).GetChild(0);
+        var parent = currentSelection.transform.GetChild(0).Find("Text");
         foreach (Transform child in parent){
             child.GetComponent<Renderer>().material = selectedMat;
         }
@@ -148,7 +151,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
         // print("change selection to " + eventData.selectedObject);
     }
     public void OnDeselect(BaseEventData eventData){ 
-        var parent = currentSelection.transform.GetChild(0).GetChild(0);
+        var parent = currentSelection.transform.GetChild(0).Find("Text");
         foreach (Transform child in parent){
             child.GetComponent<Renderer>().material = deselectedMat;
         }
