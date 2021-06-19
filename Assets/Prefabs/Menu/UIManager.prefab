@@ -1527,7 +1527,7 @@ MonoBehaviour:
   difficultySlider: {fileID: 5739590891320094304}
   poopSelector: {fileID: 910944023761493247}
   poopOffset: {x: -249.77, y: -44, z: 111}
-  rotateSpeed: 0.125
+  rotateSpeed: 0.135
   persistentSettings: {fileID: 0}
   eventSystem: {fileID: 0}
   deselectedMat: {fileID: 2100000, guid: 40da058339d800b4bb0bc99171599bed, type: 2}
