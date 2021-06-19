@@ -8319,6 +8319,9 @@ MonoBehaviour:
   tileSpeed: 12
   tileSpawnSeconds: 3.25
   maxDistanceRoadMod: 65
+  roadBlockItems:
+  - {fileID: 5094777353696975034, guid: b57163af4f8b3f14da56ad599cec32da, type: 3}
+  - {fileID: 5035498380449257774, guid: 9332e7d357c42124f904319137f3538b, type: 3}
   camTarget: {fileID: 0}
   timeToStart: 5
   timerVCamTargetPos: {x: 0, y: 0, z: 0}
