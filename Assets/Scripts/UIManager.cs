@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour, ISelectHandler
 {
     private GameObject uiManager;
     private GameObject currentSelection;
-    private RectTransform currButtonTransform;
     public Slider volumeSlider;
     public Slider difficultySlider;
     public GameObject poopSelector;
@@ -26,7 +25,6 @@ public class UIManager : MonoBehaviour, ISelectHandler
     [SerializeField] private Material deselectedMat;
     [SerializeField] private Material selectedMat;
 
-    
     
     public enum States{
         MENU, OPTIONS, GAME, QUIT
@@ -42,9 +40,15 @@ public class UIManager : MonoBehaviour, ISelectHandler
     private void Start()
     {
         SetState(0);
+        var mainMenu = uiManager.transform.Find("MainMenu");
+        var optionsMenu = uiManager.transform.Find("OptionsMenu");
+        
+        optionsMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(true);
+        
         DontDestroyOnLoad(persistentSettings);
         
-        //set unedited diff
+        //set starting difficulty in beginning
         PersistentSettings.UpdateDiff(1);
         
         //select first button
@@ -58,6 +62,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
         AudioListener.volume = volumeSlider.value;
         UpdateSliderCube(volumeSlider);
     }
+    
     public void ChangeDifficulty()
     {
         print("changing difficulty to "+difficultySlider.value+"!");
@@ -65,6 +70,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
         UpdateSliderCube(difficultySlider);
     }
 
+    //scales the cube under the specific slider depending on it's value
     private void UpdateSliderCube(Slider slider)
     {
         var sliderCubeScale = currentSelection.transform.GetChild(1).transform.localScale;
@@ -74,6 +80,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
             Remap(slider.value, slider.minValue, slider.maxValue, 0.25f, 60f));
     }
 
+    //remaps incoming values of slider to adjust for SliderCubeScale-width-transformation
     private float Remap(float input, float oldLow, float oldHigh, float newLow, float newHigh)
     {
         float t = Mathf.InverseLerp(oldLow, oldHigh, input);
@@ -81,6 +88,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
     }
     
     //int parameter to bypass OnClick() restriction of passing enum and still optimize speed
+    //TODO: outsource
     public void SetState(int state)
     {
         switch (state)
@@ -97,7 +105,7 @@ public class UIManager : MonoBehaviour, ISelectHandler
             case 2:
                 currentState = States.GAME;
                 Time.timeScale = 1;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+                SceneManager.LoadScene("Gameplay");
 
                 break; 
             
@@ -115,20 +123,19 @@ public class UIManager : MonoBehaviour, ISelectHandler
         //TODO: disable mouse or always enable one selection
         if (currentSelection != null)
         {
-            // print(currentSelection.name);
-            
-            // print(currentSelection.GetComponent<Graphic>().canvasRenderer.GetColor());
             UpdatePoopSelector();
 
             UpdateSelectionAnim();
         }
     }
-
+    
+    //updates the animation of selected button/slider
     private void UpdateSelectionAnim()
     {
         currentSelection.transform.Rotate(new Vector3(1, 0, 1), Mathf.Sin(Time.unscaledTime) * rotateSpeed);
     }
 
+    //updates the 3D poop icon next to buttons
     private void UpdatePoopSelector()
     {
         var poopTarget = currentSelection.transform.Find("PoopTarget").position;
@@ -138,11 +145,10 @@ public class UIManager : MonoBehaviour, ISelectHandler
         poopSelector.transform.position = Vector3.MoveTowards(poopSelector.transform.position, poopOffset, 125f);
     }
 
+    //change color to red on select
     public void OnSelect(BaseEventData eventData){
         currentSelection = eventData.selectedObject;
-        currButtonTransform = currentSelection.GetComponent<RectTransform>();
 
-        //change color to red on select
         var parent = currentSelection.transform.GetChild(0).Find("Text");
         foreach (Transform child in parent){
             child.GetComponent<Renderer>().material = selectedMat;
@@ -150,6 +156,8 @@ public class UIManager : MonoBehaviour, ISelectHandler
 
         // print("change selection to " + eventData.selectedObject);
     }
+    
+    //change color on deselect
     public void OnDeselect(BaseEventData eventData){ 
         var parent = currentSelection.transform.GetChild(0).Find("Text");
         foreach (Transform child in parent){

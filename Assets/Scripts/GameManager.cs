@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float tileSpeed = 1f;
     [SerializeField] public float tileSpawnSeconds = 0.95f;
     [SerializeField] public float maxDistanceRoadMod = 60f;
+    [SerializeField] public GameObject[] roadBlockItems;
     
     //cam
     public GameObject camTarget;
@@ -101,6 +102,10 @@ public class GameManager : MonoBehaviour
         policeSpawnPosOffset = playerSpawnpos + policeSpawnPosOffset;
 
         InvokeRepeating(nameof(SpawnPoliceCars), 0f, policeSpawnSeconds);
+        
+        //spawn random road block items
+        //TODO: fix attaching
+        // InvokeRepeating(nameof(SpawnRoadBlockItems), 1f, policeSpawnSeconds*2f);
 
     }
 
@@ -154,12 +159,19 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    private void SpawnRoadBlockItems()
+    {
+        //reset spawn
+        var spawnXCoord = Random.Range(-13f, 13f); //TODO: unify in map restrictions
+        var spawnZCoord = roadSpawnposOffset.z;
+
+        var newItem = Instantiate(roadBlockItems[Random.Range(0, 2)], new Vector3(spawnXCoord, 1f, spawnZCoord), Quaternion.identity);
+    }
     private void SpawnPoliceCars()
     {
         
         // print("POLICE SPAWN AT: "+policeSpawnpos.x);
         
-        //reset spawn
         policeSpawnPosOffset.x = Random.Range(-13, 13); //TODO: += policecar width or random instead
         policeSpawnPosOffset.z = Random.Range(20, 40); //TODO: magic numbas
 
