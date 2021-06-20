@@ -2,7 +2,8 @@
 
 You're a chicken on a run. Better poop your way out!
 
-Part of this Gamejam: https://itch.io/jam/mmarmalade-4​
+Part of the MMArmelade Gamejam, Salzburg University of Applied Sciences
+https://aims20.itch.io/highwaychicken
 
 (completed in about 12h)
 
