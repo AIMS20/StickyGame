@@ -63,13 +63,10 @@ public class PoliceCarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        truckController.SpinTires(tyres);
         
         UpdatePositions();
-        
 
-        
-        //TODO: iterate through enums instead? readability would suck tho
+        //TODO: iterate through enums instead like menu
         switch (currentMode)
         {
             //try to get in front of player
@@ -146,9 +143,6 @@ public class PoliceCarController : MonoBehaviour
     
     
     private void OnCollisionEnter(Collision other){
-        if (other.gameObject.CompareTag("Player") ){
-            // attackMode = Attacks.HIT;
-        }
 
         if (other.gameObject.CompareTag("Poop"))
         {
