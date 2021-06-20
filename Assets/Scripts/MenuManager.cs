@@ -9,9 +9,9 @@ using UnityEngine.InputSystem.HID;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour, ISelectHandler
+public class MenuManager : MonoBehaviour, ISelectHandler
 {
-    private GameObject uiManager;
+    private GameObject menuManager;
     private GameObject currentSelection;
     public Slider volumeSlider;
     public Slider difficultySlider;
@@ -34,14 +34,14 @@ public class UIManager : MonoBehaviour, ISelectHandler
     
     private void Awake()
     {
-        uiManager = gameObject;
+        menuManager = gameObject;
     }
 
     private void Start()
     {
         SetState(0);
-        var mainMenu = uiManager.transform.Find("MainMenu");
-        var optionsMenu = uiManager.transform.Find("OptionsMenu");
+        var mainMenu = menuManager.transform.Find("MainMenu");
+        var optionsMenu = menuManager.transform.Find("OptionsMenu");
         
         optionsMenu.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
