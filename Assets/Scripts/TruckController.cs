@@ -108,33 +108,50 @@ public class TruckController : MonoBehaviour
         
         //get horizontal input
         axisInput = Input.GetAxis("Horizontal");
-        // print(axisInput);
-        
         
         //move on X
         rb.AddForce(new Vector3(-axisInput * moveStrength, 0, 0));
 
         //rotate on Y
         var localRot = axisInput * inputAxisMod ;
-        truck.transform.Rotate(new Vector3(0,localRot , 0) * Time.deltaTime);
         
-        // print(truck.transform.localEulerAngles);
-        if (truck.transform.localEulerAngles.y > maxTurn){
-            // truck.transform.LookAt(gameManager.transform); //TODO: fix clamping of rotation
+        var currRot = truck.transform.rotation.eulerAngles.y;
+        
+        truck.transform.Rotate(new Vector3(0,localRot , 0) * Time.deltaTime);
+        if (currRot < 360f-maxTurn && currRot > maxTurn*2)//TODO: temp
+        {
+            // print("true1");
+            truck.transform.rotation = new Quaternion(0f, -maxTurn, 0f,0); 
         }
+        if (currRot > maxTurn && currRot < 360f-maxTurn*2)
+        {
+            // print("true2");
+            truck.transform.rotation = new Quaternion(0f, maxTurn, 0f, 0);
+        }
+ 
+        if (Mathf.Approximately(currRot, 180f))
+        {
+            truck.transform.rotation = new Quaternion(0, 0, 0, 0);  
+        }
+        // else
+        // {
+        //     currRot = Mathf.Min(currRot, maxTurn);
+        //     // truck.transform.LookAt(gameManager.transform); //TODO: fix clamping of rotation
+        //     // truck.transform.rotation = new Quaternion(0f, Mathf.Clamp(currRot, -maxTurn, maxTurn), 0f, 0f);
+        // }
         // print(axisInput);
         
         //spawn poop on A
         if (canPoop && Input.GetButtonDown("Poop")){
             // print("POOPING");
                 
-            Instantiate(poop, poopSpawn, Quaternion.AngleAxis(-90, new Vector3(1,0,0)));
+            Instantiate(poop, poopSpawn, Quaternion.identity);
             canPoop = false;
         }
         
         if (GameManager.gameOver && Input.GetButtonDown("Restart"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene("Menu");
         }
     }
 }
